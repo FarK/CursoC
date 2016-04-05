@@ -1,0 +1,8 @@
+> ./vehicles
+Vehicle {
+	plate = "1234 ABC"
+}
+Car {
+	plate = "4321 CBA"
+	type = "pickup"
+}

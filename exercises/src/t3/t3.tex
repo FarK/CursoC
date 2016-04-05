@@ -1,0 +1,136 @@
+\documentclass{tareas}
+
+\Tema{3}
+
+\begin{document}
+\maketitle
+%TODO: doble página
+\newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Índice}
+\tableofcontents
+\phantomsection
+\newpage
+
+\section{Tipos, arrays y cadenas}
+\begin{problem}[printf y sizeof]
+\begin{statement}
+	Crea, inicializa e imprime el valor y el tamaño de al menos 5 variables
+	de distinto tipo:
+	\\
+	\lstinputlisting[language=C]{csrc/sizeof.c}
+	\vspace{-2em}
+\end{statement}
+\end{problem}
+
+
+\begin{problem}[Arrays]
+\begin{statement}
+	Crea un array de 10 elementos y juega con él:
+
+	\begin{subproblems}
+		\subp Recorre e imprime el array
+		\subp Recorrer los elementos de posición par en orden inverso
+		\subp Cambia el elemento $i$ por el $i+1$ (y el último por el
+		primero)
+		\subp Cambia el elemento $i$ por el $i-1$ (y el primero por el
+		último)
+		\subp Espeja el array: $array[i] = array[N], array[i+1] =
+		array[N-1], \ldots$
+	\end{subproblems}
+\end{statement}
+\end{problem}
+
+
+\begin{problem}[Cadenas]
+\begin{statement}
+	Crea una cadena cualquiera (con mayúsculas y minúsculas) juega con ella.
+	\textbf{Pista}: Consulta la
+	\href{https://es.wikipedia.org/wiki/ASCII#Caracteres_imprimibles_ASCII}{tabla
+	ASCII} y ten en cuenta la diferencia entre el código de una letra en
+	minúsculas y una en mayúsculas.
+
+	\begin{subproblems}
+		\subp Convierte la cadena entera a mayúsculas
+		\subp Convierte a mayúsculas solo la primera letra de cada
+		palabra
+	\end{subproblems}
+\end{statement}
+\end{problem}
+
+
+\begin{problem}[Matrices]
+\begin{statement}
+	Crea dos matriz de dos dimensiones (3x3), inicialízalas y juega con
+	ellas:
+
+	\begin{subproblems}
+		\subp Imprime la matriz
+		\subp Multiplica todos los elementos por 2
+		\subp Multiplica las dos matrices entre sí
+	\end{subproblems}
+\end{statement}
+\end{problem}
+
+
+\clearpage
+\section{Punteros}
+\begin{problem}[Sintáxis]
+\begin{statement}
+	Crea un pequeño programa que haga lo siguiente:
+	\begin{enumerate}
+		\item Declara e inicializa un vector de 8 \lstinline[language=C]|char|
+		\item Declara un puntero a \lstinline[language=C]|char| y
+			asígnale la dirección de memoria del 1$^o$ elemento del
+			vector
+		\item Suma 4 al puntero anterior
+		\item Cambia el valor de la dirección de memoria a la que apunta
+			el puntero anterior
+		\item Crea un bucle que imprima los 8 elementos del array en
+			hexadecimal
+		\item Declara un puntero a \lstinline[language=C]|int| y
+			asígnale el valor (dirección de memoria) del puntero
+			anterior (no olvides el casting
+			\lstinline[language=C]|(int *)|
+		\item Imprime en hexadecimal el valor al que apunta el puntero a
+			\lstinline[language=C]|int|
+	\end{enumerate}
+	\vspace{-2em}
+\end{statement}
+\end{problem}
+
+\begin{problem}[Arrays y punteros]
+\begin{statement}
+	En el mismo programa realiza los siguientes apartados:
+	\begin{subproblems}
+		\subp Crea e inicializa un vector de enteros y otro de reales de
+		5 elementos cada uno
+		\subp Crea otro vector de float de 5 elementos sin inicializar
+		\subp Declara dos punteros para cada array
+		\subp Utiliza la ``\textbf{forma 1}'' para imprimir los dos
+		vectores
+		\subp Utiliza la ``\textbf{forma 3}'' multiplicar los elementos
+		del primer y el segundo vector y guardarlos en el tercero:
+		$v3[i] = v1[i] * v2[i]$
+		\subp Crea una cadena y dos punteros a char
+		\subp Utiliza la ``\textbf{forma 2}'' y los dos punteros para
+		invertir la cadena: $str[i] = str[N-i]$
+	\end{subproblems}
+\end{statement}
+\end{problem}
+
+\begin{problem}[Matrices]
+\begin{statement}
+	En el mismo programa realiza los siguientes apartados:
+	\begin{subproblems}
+		\subp Crea una matriz de enteros de 3x3 e inicialízala
+		\subp Crea un puntero que apunte a la matriz
+		\subp Crea dos enteros $i$ y $j$
+		\subp Utiliza los enteros y el puntero para recorrer e imprimir
+		la matriz la matriz. \textbf{Restricciones:} No puedes utilizar
+		el puntero como un array (\lstinline[language=C]|p[i][j]|)
+	\end{subproblems}
+\end{statement}
+\end{problem}
+
+\end{document}

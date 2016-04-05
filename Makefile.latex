@@ -1,0 +1,32 @@
+PDF_DIR = $(PDF_TOP)/$(STYLE)
+TMP_TOP = $(SRC_DIR)/tmp.latex
+TMP_DIR = $(TMP_TOP)/$(STYLE)
+
+SRCS = $(wildcard $(SRC_DIR)/*/*.tex)
+PDFS = $(addprefix $(PDF_DIR)/, $(notdir $(SRCS:.tex=.pdf)))
+
+PDFLATEX_FLAGS = -interaction=nonstopmode -file-line-error -output-directory=$(TMP_DIR)
+
+
+.PHONY: all, clean, pres, prin, alum
+
+all: $(PDFS)
+
+$(PDF_DIR)/%.pdf : $(TMP_DIR)/%.pdf | $(PDF_DIR)
+	mv ${TMP_DIR}/$(notdir $@) $@
+
+$(TMP_DIR)/%.pdf : $(SRC_DIR)/*/%.tex | $(TMP_DIR)
+	TEXINPUTS="$(SRC_DIR):$(dir $<):" pdflatex $(PDFLATEX_FLAGS) $< | grep '.*:.*:.*' -A 4
+	@test -e $@ # Force fail if pdf no exits
+
+$(TMP_DIR) :
+	@-mkdir -pv $(TMP_DIR)
+
+$(PDF_DIR) :
+	@-mkdir -pv $(PDF_DIR)
+
+clean:
+	@-rm -frv $(PDF_TOP) 2>/dev/null; true
+	@-rm -frv $(TMP_TOP) 2>/dev/null; true
+
+# vim:filetype=make

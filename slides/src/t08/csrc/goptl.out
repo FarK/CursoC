@@ -1,0 +1,6 @@
+> goptl -u -w 10 -h 20 --random=52432
+usage  = TRUE
+width  = 10
+height = 20
+random = TRUE
+rseed  = 52432

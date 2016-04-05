@@ -1,0 +1,194 @@
+\documentclass{mybeamer}
+
+\institute{
+	{\textsl{\large Tema 5}}
+	\\[1em]
+	\textbf{\Large C modular}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+\begin{multicols}{2}
+	\tableofcontents
+\end{multicols}
+\end{frame}
+
+\begin{framesec}{Funciones}
+	\begin{columns}[onlytextwidth]
+	\begin{column}{0.6\textwidth}
+		En C las funciones:
+		\begin{itemize}
+			\item Retornan un solo valor o nada (\textit{void})
+			\item De cero a N parámetros
+			\item Cada parámetro es de un tipo específico
+			\item Todos los parámetros se pasan \textbf{por copia}
+			\item Tienen una \textbf{declaración} y una
+				\textbf{definición}
+			\item Una función ha de estar declarada antes de ser
+				llamada
+			\item Una función no tiene por que estar definida a la
+				hora de ser llamada
+		\end{itemize}
+	\end{column}
+
+	\begin{column}{0.4\textwidth}
+		\lstinputlisting[numbers=none, language=C, basicstyle=\tiny]{csrc/function_example.c}
+	\end{column}
+	\end{columns}
+\end{framesec}
+
+\subsection[Parámetros]{Paso de parámetros}
+\begin{framesubsubsec}{Paso por copia}
+	\begin{columns}[onlytextwidth]
+	\begin{column}{0.5\textwidth}
+		\begin{itemize}
+			\item \textbf{Siempre se copia} el parámetro (variable o
+				constante) que se le pasa a la función al
+				llamarla
+			\item Dentro de la función se trabaja con la copia
+			\item Las variables originales no se ven afectadas
+		\end{itemize}
+	\end{column}
+
+	\begin{column}{0.4\textwidth}
+		\lstinputlisting[language=C, basicstyle=\scriptsize]{csrc/function_copy.c}
+	\end{column}
+	\end{columns}
+\end{framesubsubsec}
+
+\begin{framesubsubsec}{Paso por referencia}
+	\begin{columns}[onlytextwidth]
+	\begin{column}{0.5\textwidth}
+		\begin{itemize}
+			\item Para poder modificar las variables originales
+				dentro de una función, esta ha de trabajar con
+				la
+				\textbf{referencia} a la variable, no con la
+				original
+			\item Esto se consigue con \textbf{punteros}
+		\end{itemize}
+	\end{column}
+
+	\begin{column}{0.4\textwidth}
+		\lstinputlisting[language=C, basicstyle=\scriptsize]{csrc/function_ref.c}
+	\end{column}
+	\end{columns}
+\end{framesubsubsec}
+
+\begin{framesec}{Cabeceras}
+	\begin{itemize}
+		\item Podemos crear nuestros propios ficheros \textit{*.h}
+		\item Un fichero de cabecera suele tener únicamente
+			declaraciones y no definiciones
+		\item En el fichero de código (\textit{*.c}) se definen las
+			funciones declaradas en la cabecera
+		\item Podemos tener una cabecera y varios tipos de definiciones
+		\item Nos permite crear una interfaz que aisle al usuario de la
+			definición de las funciones
+	\end{itemize}
+\end{framesec}
+
+\begin{framesubsec}{Ejemplo}
+		\textbf{person.h}
+		\lstinputlisting[language=C, basicstyle=\tiny]{csrc/person.h}
+
+		\textbf{person.c}
+		\lstinputlisting[language=C, basicstyle=\tiny]{csrc/person.c}
+
+		\note{
+			explicar paso por referencia para optimizar la copia de
+			parámetros y \textbf{const}
+		}
+\end{framesubsec}
+
+
+\def\tFiveCompSol{
+	\textbf{Solución:}
+	\begin{itemize}
+		\item Cada fichero de código puede compilarse de manera
+			independiente, creando un \textbf{fichero
+			objeto} (\textit{*.o})
+		\item El \textbf{linker} se encarga de enlazar todos los
+			ficheros objetos para crear el ejecutable
+		\item Un módulo objeto puede tener referencias a
+			símbolos definidos en otro módulo
+	\end{itemize}
+	\vspace{1em}
+	Cómo se genera: \lstinline[language=sh]|gcc -c persona.c|
+}
+
+\ejframe{Funciones y cabeceras}
+
+\begin{framesec}[Compilación]{Compilación por bloques}
+	\only<1| handout:1>{
+	\textbf{Razones:}
+	\begin{itemize}
+		\item Tiempo:
+		\begin{itemize}
+			\item La compilación es un proceso complejo y costoso
+			\item Proyectos muy grandes pueden tardar mucho tiempo en
+				compilar
+			\item Cuando se está desarrollando esto se vuelve prohibitivo
+		\end{itemize}
+		\item Organización:
+		\begin{itemize}
+			\item Dividir el código en bloques lógicos es una buena
+				práctica
+			\item Mejora:
+			\begin{itemize}
+				\item El mantenimiento
+				\item La legibilidad
+				\item La portabilidad
+				\item La escalabilidad
+				\item etc
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	}
+
+	\only<2| handout:2>{
+		\centering
+		\ig{img/compilacion}{}{}
+		\note{\tFiveCompSol}
+	}
+
+	\only<3| handout:3>{
+		\tFiveCompSol
+	}
+\end{framesec}
+
+\begin{framesec}[Make]{Make y Makefile}
+	Herramienta para automatizar la compilación del código (y mucho más)
+	\begin{itemize}
+		\item Gestiona dependencias para no compilar innecesariamente
+		\item Facilita enormemente el trabajo
+		\item También se suele utilizar para instalación y
+			desinstalación
+	\end{itemize}
+\end{framesec}
+
+\begin{framesubsec}{Estructura}
+	\lstinputlisting[language=make, frame=none, numbers=none]{csrc/make_obj}
+	\vspace{1em}
+	\begin{itemize}
+		\item \textbf{Objetivos}: Un objetivo suele ser un archivo que
+			se desea generar (por ejemplo, un ejecutable)
+		\item \textbf{Prerequisitos}: Lista de objetivos
+		\item \textbf{Órdenes}: Instrucciones a realizar para generar el
+			objetivo. Siempre van precedidas de una tabulación
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsec}{Ejemplo}
+	\textbf{makefile}
+	\lstinputlisting[language=make]{csrc/make_example}
+\end{framesubsec}
+
+\ejframe[subsec]{Makefile}
+
+\end{document}

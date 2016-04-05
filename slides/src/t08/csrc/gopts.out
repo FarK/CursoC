@@ -1,0 +1,4 @@
+> gopts -a -b 3 -c hola
+aflag  = 1
+bvalue = 3
+cvalue = "hola"

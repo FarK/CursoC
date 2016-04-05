@@ -1,0 +1,136 @@
+\documentclass{mybeamer}
+\usepackage{beramono} % For bold texttt
+
+\usepackage{tikz}
+\newcommand{\tikzmark}[2]{%
+	     \tikz[overlay,remember picture] \node[text=black, inner sep=2pt] (#1) {#2};
+}
+
+\institute{
+	{\textsl{\large Tema 9}}
+	\\[1em]
+	\textbf{\Large Listas encadenadas}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+% \begin{multicols}{2}
+	\tableofcontents
+% \end{multicols}
+\end{frame}
+
+\begin{framesec}[¿Qué es?]{¿Qué es una lista encadenada?}
+	\ig{img/list}{}{}
+	\vspace{2em}
+	\begin{itemize}
+		\item Cada elemento guarda:
+		\begin{enumerate}
+			\item Información
+			\item Una referencia al siguiente elemento [y al
+				anterior]
+		\end{enumerate}
+		\item Los elementos están dispersos en la memoria. Se reservan
+			individualmente.
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}[Utilidad]{¿Cuándo son útiles?}
+	\begin{itemize}
+		\item \textbf{No sabemos cuántos} elementos vamos a tener que
+			guardar
+		\item Vamos a recorrer los elementos de manera
+			\textbf{secuencial}
+		\item Necesitamos hacer \textbf{inserciones} y/o
+			\textbf{eliminaciones} de elementos o sublistas
+	\end{itemize}
+\end{framesec}
+
+\section{Operaciones}
+\begin{framesubsec}{Insertar}
+	\centering
+	\ig{img/list_ins1.png}{}{0.4}
+	\vspace{1em}
+	\ig{img/list_ins2.png}{}{0.4}
+\end{framesubsec}
+
+\begin{framesubsec}{Eliminar}
+	\centering
+	\ig{img/list_del1.png}{}{0.4}
+	\vspace{1em}
+	\ig{img/list_del2.png}{}{0.4}
+\end{framesubsec}
+
+\begin{framesec}{Lista del Kernel}
+	\begin{columns}[t]
+		\begin{column}{0.5\textwidth}
+			\ig{img/list_head}{}{}
+			\vspace{1.1em}
+			\lstinputlisting[language=C, numbers=none, frame=none]{csrc/list_head.c}
+		\end{column}
+		\hspace{1em}
+		\begin{column}{0.5\textwidth}
+			\ig{img/list_str}{}{}
+			\vspace{1em}
+			\lstinputlisting[language=C, numbers=none, frame=none]{csrc/list_str.c}
+		\end{column}
+	\end{columns}
+\end{framesec}
+
+\begin{framesubsec}{Ejemplo}
+	\setbeamercovered{transparent}
+	\only<1| handout:1>{\ig{img/list_1}{}{}\par}
+	\only<2| handout:2>{\ig{img/list_2}{}{}\par}
+	\only<3| handout:3>{\ig{img/list_3}{}{}\par}
+	\only<4| handout:4>{
+		\lstinputlisting[language=bash, numbers=none, frame=none, xleftmargin=0.35\textwidth, linewidth=0.65\textwidth]{csrc/list.out}
+		\vspace{1em}
+	}
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={13-31}, escapeinside=@@]{csrc/list.c}
+\end{framesubsec}
+
+\begin{framesubsec}[list\_entry]{¿Cómo se obtiene el elemento a partir del \texttt{list\_head}?}
+	\centering
+	\ig{img/list_entry}{}{}
+	\vspace{1em}
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={183-190}]{csrc/list.h}
+\end{framesubsec}
+
+\begin{framesubsec}[Funciones]{Funciones principales}
+	\begin{itemize}
+		\item \texttt{\bfseries list\_add}: Añade \textbf{después} de la cabeza
+			(\textbf{pila})
+		\item \texttt{\bfseries list\_add\_tail}: Añade \textbf{antes} de la
+			cabeza (\textbf{cola})
+		\item \texttt{\bfseries list\_move}: Mueve un elemento de una lista a
+			\textbf{después} de la cabeza de otra (\textbf{pila})
+		\item \texttt{\bfseries list\_move\_tail}: Mueve un elemento de una lista a
+			\textbf{antes} de la cabeza de otra (\textbf{cola})
+		\item \texttt{\bfseries list\_del}: Borra el nodo que recibe
+		\item \texttt{\bfseries list\_splice}: Une dos listas
+		\item \texttt{\bfseries list\_empty}: Comprueba si una lista está vacía
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsec}[Macros]{Macros principales}
+	\begin{itemize}
+		\item \texttt{\bfseries INIT\_LIST\_HEAD}: Inicializa la cabeza
+			de una lista
+		\item \texttt{\bfseries list\_for\_each}: Recorre cada
+			\textbf{nodo} de una lista
+		\item \texttt{\bfseries list\_for\_each\_safe}: Recorre cada
+			\textbf{nodo} de una lista y se puede borrar un
+			elemento mientras se rocorre la lista.
+		\item \texttt{\bfseries list\_for\_each\_entry}: Recorre cada
+			\textbf{elemento} de una lista
+		\item \texttt{\bfseries list\_for\_each\_entry\_safe}: Recorre cada
+			\textbf{elemento} de una lista y se puede borrar un
+			elemento mientras se rocorre la lista.
+	\end{itemize}
+\end{framesubsec}
+
+\end{document}

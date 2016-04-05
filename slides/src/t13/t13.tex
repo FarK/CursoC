@@ -1,0 +1,160 @@
+\documentclass{mybeamer}
+\usepackage{marvosym}
+
+\institute{
+	{\textsl{\large Tema 13}}
+	\\[1em]
+	\textbf{\Large Depuración}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+% \begin{multicols}{2}
+	\tableofcontents
+% \end{multicols}
+\end{frame}
+
+\begin{framesec}{Introducción}
+	\begin{itemize}
+		\item \textbf{¿Qué es depurar (debugging)?}: El proceso por el
+			cual buscas y/o eliminas fallos (bugs) de tu programa
+
+		\item \textbf{¿Qué es un depurador (debugger)?}: Una herramienta
+			que facilita la depuración al permitir detener tu
+			programa en cualquier instante y mirar que está pasando
+
+		\item \textbf{¿Por qué es importante usarlo?}: . El método
+			tradicional de los \texttt{printf} de depuración está
+			bien, pero se queda corto en cuanto el programa crece en
+			complejidad. En este punto, el depurador se vuelve la
+			manera más eficiente y fácil de depurarlo.
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{GDB}
+	\begin{itemize}
+		\item Depurador del proyecto GNU
+		\item Un proyecto muy maduro (30 años)
+		\item Repleto de utilidades para depurar
+		\item Capaz de depurar varios lenguajes (\textbf{C}, C++, Ada,
+			Objective-C, Free Pascal, Fortran, Java \ldots)
+		\item Soporta muchas arquitecturas (x86, x86-64, ARM, AVR,
+			\ldots)
+		\item Sistema cliente-servidor que permite depuración remota
+		\item Base de muchos depuradores gráficos actuales (CodeBlocs,
+			Eclipse, NetBeans, VisualStudio, QtCreator, \ldots)
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{Cómo utilizar GDB}
+	\begin{enumerate}
+		\item Compilar con símbolos de depuración \texttt{gcc -g main.c
+			-o miprog} (\texttt{-ggdb} para símbolos específicos de
+			gdb)
+		\item Arrancar nuestro programa con gdb: \texttt{gdb miprog}
+		\item Utilizar los comandos de gdb para depurar
+	\end{enumerate}
+\end{framesec}
+
+\begin{framesec}{Comandos}
+	\centering \Huge \bfseries COMANDOS
+\end{framesec}
+
+\begin{framesubsec}{Inicio}
+	El programa se inicioa con el comando \texttt{run}. Si nuestro programa
+	recibe parámetros, se los pasamos a \texttt{run}:
+
+	\begin{center}
+		\texttt{\Large (gdb) run -w 10 -h 15}
+	\end{center}
+\end{framesubsec}
+
+\begin{framesubsec}{Breakpoints}
+	\only<1| handout:1>{
+	Un \textbf{breakpoint} define el momento en el que se va a detener
+	nuestro programa para permitirnos examinarlo.
+	\\[1em]
+	Podemos elegir que se detenga cuando:
+	\begin{itemize}
+		\item Alcance cierta línea de código:\\
+			\texttt{(gdb) break main.c:15}
+		\item Entre en una función determinada:\\
+			\texttt{(gdb) break world\_alloc}
+		\item Se modifique cierta variable:\\
+			\texttt{(gdb) watch contador}
+	\end{itemize}
+	}
+
+	\only<2| handout:2>{
+	Otros comandos:
+	\begin{itemize}
+		\item Listar los breakpoints (y watchpoints):\\
+			\texttt{(gdb) info breakpoints}
+		\item Elimiar breakpoint:\\
+			\texttt{(gdb) delete <num que sale al listar>}
+		\item Elimiar todos los breakpoint:\\
+			\texttt{(gdb) delete breakpoints}
+	\end{itemize}
+	}
+\end{framesubsec}
+
+\begin{framesubsec}{Paso a paso}
+	Tenemos varios comandos para realizar una ejecución ``paso a paso'' de
+	nuestro programa:
+
+	\begin{itemize}
+		\item Ejecutar hasta el siguiente breakpoint:\\
+			\texttt{(gdb) continue}
+		\item Ejecutar una línea (sin entrar en funciones):\\
+			\texttt{(gdb) next}
+		\item Ejecutar una línea (entrado en funciones):\\
+			\texttt{(gdb) step}
+		\item Salir de la función actual:\\
+			\texttt{(gdb) finish}
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsec}{Estado del programa}
+	\begin{itemize}
+		\item Ver una variable:\\
+			\texttt{(gdb) print contador}
+		\item Ver una estructura:\\
+			\texttt{(gdb) print *world}
+		\item Ver el resultado de una expresión:\\
+			\texttt{(gdb) print size\_x * size\_y}
+		\item Ver el resultado de una función:\\
+			\texttt{(gdb) print world\_get\_cell(w, 1, 2)}
+		\item Ver las variables locales:\\
+			\texttt{(gdb) info locals}
+		\item Ver algunas línas de código de alrededor:\\
+			\texttt{(gdb) list}
+		\item Ver la pila de llamadas:\\
+			\texttt{(gdb) backtrace}
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsec}{Otros comandos útiles}
+	\begin{itemize}
+		\item Ver clases de comandos:\\
+			\texttt{(gdb) help}
+		\item Ver comandos de un clase (por ejemplo, breakpoints):\\
+			\texttt{(gdb) help breakpoints}
+		\item Ver ayuda sobre un comando (por ejemplo, break):\\
+			\texttt{(gdb) help break}
+		\item Para salir:\\
+			\texttt{(gdb) quit}
+		\item Puedes abreviar un comando siempre que no sea ambiguo:\\
+			\texttt{(gdb) help n} == \texttt{(gdb) help next}
+		\item Para ejecutar el comando anterior pulsar ENTER
+		\item Para autocompletar (comandos, nombres de funciones y
+			variables, etc) pulsar TAB
+		\item Chuleta: \url{http://lab46.corning-cc.edu/_media/opus/fall2014/mgardne8/70120637.png}
+	\end{itemize}
+\end{framesubsec}
+
+\end{document}

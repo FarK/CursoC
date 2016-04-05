@@ -1,0 +1,78 @@
+\documentclass{mybeamer}
+
+\institute{
+	{\textsl{\large  Anexo}}
+	\\[1em]
+	\textbf{\Large Flujo de trabajo}
+	\\
+	{\normalsize pull-request en GitHub}
+}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+\begin{multicols}{2}
+	\tableofcontents
+\end{multicols}
+\end{frame}
+
+\begin{framesec}[Cambios]{Crea y revisa tus cambios}
+	\ig{img/ss_mod/01.png}{}{}
+\end{framesec}
+
+\begin{framesec}[pull request]{Crea un nuevo pull request}
+	En la pestaña \textit{Pull Request} pulsa \textit{New pull request}
+	\ig{img/ss_mod/02.png}{}{}
+\end{framesec}
+
+\begin{framesec}[Elige la rama]{Elige la rama sobre la que aplicar tus cambios}
+	\begin{enumerate}
+		\item click en \textit{compare across forks}
+		\item elegir la rama del profesor como \textit{base fork}
+		\item elegir tu rama como \textit{head fork}
+		\item click en \textit{Create pull request}
+	\end{enumerate}
+	\centering
+	\ig{img/ss_mod/03.png}{}{0.6}
+\end{framesec}
+
+\begin{framesec}[Título y comentario]{Añade un título y un comentario}
+	\ig{img/ss_mod/04.png}{}{}
+\end{framesec}
+
+\begin{framesec}{Solicitado con éxito}
+	\ig{img/ss_mod/05.png}{}{}
+\end{framesec}
+
+\begin{framesec}[Revisiones]{Espera las revisiones del profesor}
+	\ig{img/ss_mod/06.png}{}{}
+\end{framesec}
+
+\begin{framesec}{Arreglos}
+	\only<1-2>{
+		Crea un nuevo commit (o varios) para solucionar las correcciones
+		que te hayan pedido
+	}
+	\only<1>{\ig{img/ss_mod/07.png}{}{}}
+	\only<2>{\ig{img/ss_mod/08.png}{}{}}
+	\only<3>{
+		El nuevo commit deberá salir en la página de tu pull request
+		\ig{img/ss_mod/09.png}{}{}
+	}
+\end{framesec}
+
+\begin{framesec}[Aceptado]{Espera a nuevas revisiones o a que sea aceptado}
+	\ig{img/ss_mod/10.png}{}{}
+\end{framesec}
+
+\begin{framesec}{Network}
+	Puedes ver tu pull request gráficamente en la pestaña \textit{network}
+	\ig{img/ss_mod/11.png}{}{}
+\end{framesec}
+
+\end{document}

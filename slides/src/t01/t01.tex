@@ -1,0 +1,199 @@
+\documentclass{mybeamer}
+
+\institute{
+	{\textsl{\large Tema 1}}
+	\\[1em]
+	\textbf{\Large Introducción e Historia de C}
+}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\note[itemize]{
+	\item Presentación de alumnos
+	\item Recordar cambios en aulas y horarios:
+		\url{http://1984.lsi.us.es/wiki-c}
+}
+
+\begin{frame}
+\frametitle{Índice}
+\tableofcontents
+\end{frame}
+
+\begin{framesec}{Inicios}
+	\setbeamercovered{transparent}
+	\centering
+	\ig{img/ken_thompson}{}{0.2}
+	\hspace{1em}
+	\ig{img/dennis_ritchie}{}{0.2}
+	\hspace{1em}
+	\ig{img/brian_kernighan}{}{0.2}
+	\\
+	\begin{itemize}
+		\item<2-> \textbf{Ken Thompson}
+		\item<2-> \textbf{Dennis Ritchie}
+		\item<2-> \textbf{Brian Kernighan}
+		\note<2>{
+			\begin{itemize}
+				\item Ken Thompson: Izquierda
+				\item Dennis Ritchie: Centro
+				\item Brian Kernighan: Derecha
+			\end{itemize}
+			\begin{itemize}
+				\item Ken Thompson: Diseña B junto con Dennis
+					(simplificación de BCPL)
+				\item Dennis Ritchie: Diseña C
+				\item Brian Kernighan: Documenta C junto con
+					Dennis
+			\end{itemize}
+		}
+	\end{itemize}
+
+	\begin{itemize}
+		\item<3->  \textbf{Bell Labs} (de \textbf{AT\&T})
+		\note<3>{
+			\begin{itemize}
+				\item Inicios ligados a \textit{Alexander
+					Graham Bell}
+				\item Al principio una división de
+					\textbf{AT\&T}, ahora de Nokia
+			\end{itemize}
+		}
+
+		\item<4-> Ensamblador y \textbf{B} insuficientes
+			\textrightarrow\ diseñan \textbf{C}
+		\note<4>{
+			\textbf{B} fue creado por \textbf{Dennis Ritchie}
+				con \textbf{Ken Thompson}
+		}
+		\item<5-> C fue desarrollado por \textbf{Dennis Ritchie} entre
+			1969 y \textbf{1973}
+
+		\item<6-> \textbf{Unix} reescrito en C (1973)
+		\note<6>{Al principio estaba en su mayoría en ensamblador}
+		\item<7-> En 1973 \textit{Brian Kernighan} y \textit{Dennis
+			Ritchie} publican \textbf{The C Programming Language}
+			(\textbf{K\&R}), que por muchos años sirvió como
+			especificación informal del lenguaje.
+		\item<8-> Posteriormente se añaden más funcionales a C y se
+			estandariza.
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{Influencias}
+	\ig{img/languages_h}{}{}
+\end{framesec}
+
+\begin{framesec}{¿Por qué C?}
+	\centering
+	\only<1| handout:1>{
+	\begin{itemize}
+		\item Simpleza
+		\item Características de bajo nivel
+		\item Madurez
+		\item Eficiencia
+		\item Portabilidad
+		\item Numerosas bibliotecas y herramientas
+	\end{itemize}
+	}
+	\only<2| handout:2>{
+	\begin{itemize}
+		\item Popularidad
+	\end{itemize}
+	\ig{img/tiobe}{1}{0.8}
+	}
+\end{framesec}
+
+\note[itemize]{
+	\item Manejo de memoria
+	\item 44 años de madurez
+	\item Compiladores muy buenos
+}
+
+\begin{framesec}{¿Para qué C?}
+	\begin{itemize}
+		\item \textbf{Ciencia:}
+		\begin{itemize}
+			\item Simulaciones
+			\item Operaciones con grandes cantidades de tatos
+		\end{itemize}
+		\item \textbf{Sistemas Empotrados:}
+		\begin{itemize}
+			\item Sistemas Operativos en tiempo real
+			\item Electrodomésticos, ascensores, automovilismo \ldots
+		\end{itemize}
+		\item \textbf{Robótica}
+		\begin{itemize}
+			\item Drones
+			\item Robots humanoides
+			\item Coches autónomos
+		\end{itemize}
+		\item \textbf{Medicina}
+		\begin{itemize}
+			\item Prótesis robóticas
+			\item Equipamiento médico
+		\end{itemize}
+		\item \textbf{Sistemas Operativos}
+	\end{itemize}
+\end{framesec}
+
+\begin{framesubsec}{Proyectos en C}
+	\begin{itemize}
+		\item Unix, GNU/Linux, kernel de MacOS y kernel de Windows
+		\item Firefox y muchos otros exploradores (gumbo)
+		\item Apache
+		\item Gnome (GTK)
+		\item Rover Curiosity (2.5 millones de lineas)
+	\end{itemize}
+\end{framesubsec}
+
+\section{Sumer Of Code}
+\begin{framesubsec}[GSOC]{Google Summer Of Code}
+	\begin{minipage}[0.2\textheight]{\textwidth}
+	\begin{columns}[c]
+		\begin{column}{0.7\textwidth}
+		\begin{itemize}
+			\item Beca de Google para estudiantes
+			\item Trabajas \textbf{3 meses} en un proyecto de
+				\textbf{software libre}
+			\item Experiencia
+			\item Dinero: 5500\$
+		\end{itemize}
+		\vspace{2em}
+		\url{https://summerofcode.withgoogle.com/}
+		\end{column}
+
+		\begin{column}{0.3\textwidth}
+			\ig{img/gsoc}{}{}
+		\end{column}
+	\end{columns}
+	\end{minipage}
+\end{framesubsec}
+
+\begin{framesubsec}{Outreachy}
+	\ig{img/outreachy}{}{}
+	\\[2em]
+	\begin{itemize}
+		\item Beca de Gnome para:
+		\begin{itemize}
+			\item mujeres
+			\item grupos discriminados o con poca
+				representación en el mundo tecnológico
+			\item \textbf{Que no hayan participado antes ni
+				en Outreachy ni en GSOC}
+		\end{itemize}
+		\item Trabajas \textbf{3 meses} en un proyecto de
+			\textbf{software libre}
+		\item Experiencia
+		\item Dinero: 5500\$
+	\end{itemize}
+	\vspace{2em}
+	Hasta el 22 Marzo
+	\url{https://gnome.org/outreachy/}
+\end{framesubsec}
+
+
+\end{document}

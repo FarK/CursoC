@@ -1,0 +1,305 @@
+\documentclass{mybeamer}
+
+\institute{
+	{\textsl{\large Tema 2}}
+	\\[1em]
+	\textbf{\Large Configurando entorno de trabajo}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+\tableofcontents
+\end{frame}
+
+\begin{framesec}{Material de clase}
+	\textbf{\Large Wiki}
+
+	{\small \url{http://1984.lsi.us.es/wiki-c}}
+	\\[2em]
+	\textbf{\Large Lista de correo}
+
+	{\small \url{https://listas.us.es/mailman/listinfo/programacion-c}}
+\end{framesec}
+
+\begin{framesec}{Linux}
+	\begin{minipage}[0.2\textheight]{\textwidth}
+	\begin{columns}[c]
+		\begin{column}{0.8\textwidth}
+		GNU/Linux es el sistema operativo que vamos a utilizar durante
+		el curso.
+
+		\begin{itemize}
+			\item Ofrece muchísimas facilidades al programador
+			\item Software libre y gratuito
+			\item Repositorios con infinidad de herramientas a
+				nuestra disposición
+		\end{itemize}
+		\end{column}
+
+		\begin{column}{0.2\textwidth}
+			\ig{img/tux}{}{}
+		\end{column}
+	\end{columns}
+	\end{minipage}
+\end{framesec}
+
+\begin{framesubsec}{Consola}
+	\only<1| handout:1>{
+		\centering
+		\textbf{CTRL + ALT + T}
+		\\[1em]
+		\ig{img/terminals}{}{}
+
+		\note{
+			\textbf{vimtutor} para los que ya estén familiarizados
+			con la consola de linux
+		}
+	}
+
+	\only<2| handout:2>{
+		Comandos básicos:
+		\begin{description}[labelwidth=1cm]
+			\item [\texttt{ls}:          ] Lista directorios
+			\item [\texttt{cd <dir>}:    ] Cambia a directorio
+			\item [\texttt{mkdir <dir>}: ] Crea directorio
+			\item [\texttt{touch <file>}:] Crea archivo vacío*
+			\item [\texttt{rm <file>}:   ] Borra archivo
+			\item [\texttt{rm -r <dir>}: ] Borra directorio y lo que
+				hay dentro
+		\end{description}
+
+		\note{
+			* touch realmente modifica la fecha de edición de un
+			archivo, pero si no existe lo crea
+			\\[1em]
+			Ejercicio (o vimtutor):
+			\begin{itemize}
+				\item crear carpeta1
+				\item crear archivo1 dentro de la careta1
+				\item crear carpeta2 dentro de la careta1
+				\item crear archivo2 dentro de la careta2
+				\item crear archivo3 dentro de la careta2
+				\item volver HOME
+				\item borrar archivo1
+				\item borrar archivo2 y archivo3
+				\item borrar carpeta1 y carpeta2
+			\end{itemize}
+		}
+	}
+
+\end{framesubsec}
+
+\begin{framesubsec}{Instalando herramientas}
+	Comandos para instalar:
+	\begin{description}[align=right,labelwidth=10cm]
+		\item[\texttt{sudo <comando>}:               ] Ejecuta un
+			comando con permisos de administrador
+		\item[\texttt{apt-get install <programa>}:   ] Instala un
+			programa del repositorio
+	\end{description}
+
+	Programas a instalar (\texttt{sudo apt-get install <programa>}):
+	\begin{itemize}
+		\item \textbf{gcc}: Compilador
+		\item \textbf{git}: Gestor de versiones
+		\item \textbf{vim}: Editor de texto
+		\item \textbf{geany}: Editor de texto gráfico
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesec}{Git}
+	\begin{columns}[c]
+		\column{0.5\textwidth}
+			\centering
+			\ig{img/git_logo}{}{}
+		\column{0.5\textwidth}
+			\centering
+			\ig{img/tux}{}{}
+	\end{columns}
+\end{framesec}
+
+\note[itemize]{
+	\item Sistema de control de versiones
+	\item Nacimiento:
+	\begin{itemize}
+		\item Retiran la licencia de uso gratuito de BitKeeper
+		\item Ningún sistema de control de versiones cumplía los requisitos
+			necesarios
+		\item Crean el suyo propio:
+		\begin{itemize}
+			\item toman CVS como ejemplo de lo que NO hacer
+			\item se basan el flujo de trabajo de BitKeeper
+			\item énfasis en las protecciones contra corrupción de
+				datos
+		\end{itemize}
+	\end{itemize}
+}
+
+\begin{framesubsec}{Características}
+	\begin{itemize}
+		\item Historial de versiones
+		\item Visualización de cambios
+		\item Revertir cambios
+		\item Trabajo en equipo de forma concurrente
+		\item Integridad de los archivos
+		\item Sistema distribuido
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsec}{Distribuido VS Centralizado}
+	\begin{columns}[t]
+		\column{0.4\textwidth}
+			\centering
+			\textbf{\large Centralizado}
+			\\[1em]
+			\ig{img/repo_centr}{}{}
+		\column{0.1\textwidth}
+			\hspace{0.1\textwidth}
+		\column{0.4\textwidth}
+			\centering
+			\textbf{\large Distribuido}
+			\\[1em]
+			\ig{img/repo_distr}{}{}
+	\end{columns}
+\end{framesubsec}
+
+\begin{framesubsec}{Funcionamiento}
+	\centering
+	\ig{img/git_scheme}{}{}
+	\\[2em]
+	\begin{itemize}
+		\item Instantáneas del estado del repo
+		\item Un comentario por cada instantánea
+		\item Solo se guardan las diferencias
+		\item Máquina de el tiempo
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsec}{Cuenta en GitHub}
+	\only<0| handout:0>{
+		\centering
+		\ig{img/github_logo}{}{}
+		\vspace{1em}
+		\hrule
+		\vspace{1em}
+		\url{https://github.com/}
+	}
+	\only<1| handout:1>{
+		\centering
+		Elegimos un nombre de usuario, una contraseña e introducimos
+		nuestro correo
+		\vspace{1em}
+		\hrule
+		\vspace{1em}
+		\ig{img/gh_ss/1}{}{0.6}
+	}
+	\only<2| handout:2>{
+		\centering
+		Nos aseguramos de que el plan gratuito está seleccionado y
+		hacemos click en ``\textit{Finish sing up}''
+		\vspace{1em}
+		\hrule
+		\vspace{1em}
+		\ig{img/gh_ss/2}{}{0.7}
+	}
+	\only<3| handout:3>{
+		\centering
+		Debemos confirmar la dirección de correo
+		\vspace{1em}
+		\hrule
+		\vspace{1em}
+		\ig{img/gh_ss/3}{}{}
+	}
+	\only<4| handout:4>{
+		\centering
+		Buscamos el correo de confirmación en nuestro buzón y hacemos
+		click en ``\textsl{Verify email address}''
+		\vspace{1em}
+		\hrule
+		\vspace{1em}
+		\ig{img/gh_ss/4}{}{0.7}
+	}
+	\only<5| handout:5>{
+		\centering
+		¡Ya tenemos cuenta en GitHub! Ahora tenemos que crear un nuevo
+		repositorio haciendo click donde apunta la flecha roja
+		\vspace{1em}
+		\hrule
+		\vspace{1em}
+		\ig{img/gh_ss/5}{}{}
+	}
+	\only<6| handout:6>{
+		\centering
+		El nombre del repositorio tiene que tener el formato
+		``\textbf{cursoc-\textless tu\_nombre\_compuesto\textgreater }''
+		\vspace{1em}
+		\hrule
+		\vspace{1em}
+		\ig{img/gh_ss/6}{}{0.7}
+	}
+	\only<7| handout:7>{
+		\centering
+		Copiamos la dirección HTTPS de nuestro repositorio
+		\vspace{1em}
+		\hrule
+		\vspace{1em}
+		\ig{img/gh_ss/7}{}{0.9}
+	}
+\end{framesubsec}
+
+\section{Flujo de trabajo}
+\begin{framesubsec}[Repositorio local]{Repositorio local y README}
+	Seguimos paso por paso las instrucciones que nos ofrece GitHub:
+	\begin{itemize}
+		\item \texttt{mkdir \textless nombre de mi repo\textgreater}
+		\item \texttt{vim README.md}
+		\item \texttt{git init}
+		\item \texttt{git add README.md}
+		\item \texttt{git commit -m "primer commit"}
+		\item \texttt{git remote add origin {\color{blue} https://github.com/4lice/cursoc-alice.git}}
+		\item \texttt{git push -u origin master}
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsec}{Primer código}
+	\centering
+	\texttt{\$\textgreater\ vim helloworld.c}
+	\\[1em]
+	\lstinputlisting[language=C]{csrc/helloworld.c}
+	\vspace{1em}
+	Compilación y ejecución:
+	\begin{itemize}
+		\item \texttt{gcc \textless mi\_prog.c\textgreater -o \textless
+			mi\_exe\textgreater}
+		\item \texttt{./mi\_exe}
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsec}{Subiendo hola mundo}
+	\begin{itemize}
+		\item \texttt{git status}
+		\item \texttt{git add helloworld.c}
+		\item \texttt{git commit -m "hola mundo!"}
+		\item \texttt{git push -u origin master}
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsec}{Editando}
+	\lstinputlisting[language=diff]{csrc/hw_patch.diff}
+\end{framesubsec}
+
+\begin{framesubsec}{Subiendo cambios}
+	\begin{itemize}
+		\item \texttt{git status}
+		\item \texttt{git add helloworld.c}
+		\item \texttt{git commit -m "hola yo!"}
+		\item \texttt{git push}
+	\end{itemize}
+\end{framesubsec}
+
+\end{document}

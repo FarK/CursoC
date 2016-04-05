@@ -1,0 +1,50 @@
+\documentclass{tareas}
+
+\Tema{6}
+
+\begin{document}
+\maketitle
+%TODO: doble página
+\newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Índice}
+\tableofcontents
+\phantomsection
+\newpage
+
+\section{Cabeceras y funciones}
+
+\begin{problem}[Arrays multidimensionales 1]
+\begin{statement}
+	\subp Crea una estructura, \lstinline[language=C]|struct array|, que
+	guarde el número de columnas, el número de filas y el puntero a un array
+	de dos dimensiones.
+	\subp Crea un método \lstinline[language=C]|array_alloc(int rows, int cols)|,
+	que reserve la memoria para el tamaño indicado y devuelva el
+	puntero al array. Utiliza la \textbf{Forma 1} exlicada en clase.
+	\subp Crea un método \lstinline[language=C]|array_free| que libere el
+	array
+	\subp Inicializa e imprime el array
+	\subp Comprueba que no hay leaks de memoria con valgrind
+\end{statement}
+\end{problem}
+
+\begin{problem}[Arrays multidimensionales 2]
+\begin{statement}
+	\subp Crea una estructura, \lstinline[language=C]|struct array|, que
+	guarde el número de columnas, el número de filas y el puntero a un array
+	de dos dimensiones.
+	\subp Crea un método \lstinline[language=C]|array_alloc(int rows, int cols)|,
+	que reserve la memoria para el tamaño indicado y devuelva el
+	puntero al array. Utiliza la \textbf{Forma 2} exlicada en clase.
+	\subp Crea un método \lstinline[language=C]|array_free| que libere el
+	array
+	\subp Crea los métodos \lstinline[language=C]|array_set(int i, int j)| y
+	\lstinline[language=C]|array_get(int i, int j)| que permitan acceder y
+	modificar un elemento en articular de la matriz.
+	\subp Inicializa e imprime el array
+	\subp Comprueba que no hay leaks de memoria con valgrind
+\end{statement}
+\end{problem}
+
+\end{document}

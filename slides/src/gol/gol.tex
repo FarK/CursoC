@@ -1,0 +1,40 @@
+\documentclass{mybeamer}
+
+\institute{
+	{\textsl{\large Proyecto}}
+	\\[1em]
+	\textbf{\Large Juego de la vida}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+\tableofcontents
+\end{frame}
+
+\begin{framesec}{Introducción}
+	\centering
+	\ig{img/gol}{}{0.3}
+	\begin{itemize}
+		\item juego de 0 jugadores
+		\item Rejilla de células cuadradas como universo bidimensional
+			ortogonal (infinito o no)
+		\item Cada célula tiene dos estados (muerta o viva) e interactúa
+			con sus 8 vecinas según unas reglas
+		\item La regla más común es:
+		\begin{itemize}
+			\item \textbf{Nacimiento}: Una célula muerta con
+				exactamente 3 vecinas vivas estará viva en la
+				siguiente iteración
+			\item \textbf{Supervivencia}: Una célula viva con 2 o 3
+				vecinas vivas seguirá viva en la siguiente
+				iteración, de lo contrario morirá.
+		\end{itemize}
+	\end{itemize}
+\end{framesec}
+
+\end{document}

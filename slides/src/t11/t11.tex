@@ -1,0 +1,62 @@
+\documentclass{mybeamer}
+\usepackage{beramono} % For bold texttt
+
+\institute{
+	{\textsl{\large Tema 11}}
+	\\[1em]
+	\textbf{\Large Punteros a funciones}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+% \begin{multicols}{2}
+	\tableofcontents
+% \end{multicols}
+\end{frame}
+
+\begin{framesec}{Introducción}
+	\centering
+	\lstinline[language=C]|const char *(*ptr\_2\_func)(int, char *);|
+	\vspace{2em}
+
+	\begin{itemize}
+		\item Guardan la dirección de una función
+		\item Muy útiles en ciertas situaciones
+		\item Sintaxis complicada (Consultar \url{http://cdecl.org/})
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}[Ejemplo 1]{Ejemplo 1: Declaración, asignación y llamada}
+	\lstinputlisting[language=C, basicstyle=\scriptsize]{csrc/ptrf.c}
+\end{framesec}
+
+\def\cmplst[#1]{
+	\lstinputlisting[language=C, basicstyle=\scriptsize, linerange={#1}]{csrc/comparator.c}
+}
+\begin{framesec}[Ejemplo 2]{Ejemplo 2: Comparator}
+	\only<1| handout:1>{                       % struct and main
+		\cmplst[3-6]
+		\cmplst[44-53]
+	}
+	\only<2| handout:2>{\cmplst[8-26]}         % comparators
+	\only<3| handout:3>{\cmplst[33-34, 35-42]} % typedef and max
+	\only<4| handout:4>{                       % main and out
+		\cmplst[44-53]
+		\lstinputlisting[language=bash, numbers=none, frame=none]{csrc/comparator.out}
+	}
+\end{framesec}
+
+\def\arrylst[#1]{
+	\lstinputlisting[language=C, basicstyle=\scriptsize, linerange={#1}]{csrc/ptrfarray.c}
+}
+\begin{framesec}[Ejemplo 3]{Ejemplo 3: Array}
+	\only<1| handout:1>{\arrylst[1-8, 11-16, 18-27]}   % with switch
+	\only<2| handout:2>{\arrylst[1-17, 25-27]}         % with ptr
+\end{framesec}
+
+\end{document}

@@ -1,0 +1,62 @@
+\documentclass{tareas}
+
+\Tema{5}
+
+\begin{document}
+\maketitle
+%TODO: doble página
+\newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Índice}
+\tableofcontents
+\phantomsection
+\newpage
+
+\section{Cabeceras y funciones}
+
+\begin{problem}[Swap]
+\begin{statement}
+	Crea la función ``\texttt{swap}'' que permita intercambiar dos enteros,
+	ie: el entero 1 toma el valor del entero 2 y viceversa.
+\end{statement}
+\end{problem}
+
+\begin{problem}[Complejos]
+\begin{statement}
+	Basándote en el ejemplo de ``person'', implementa una pequeña librería
+	para trabajar con números complejos (\texttt{cmplx.h y cmplx.c}).
+
+	\subp Crea la estructura ``\texttt{cmplx}'' con dos campos
+	\texttt{double}: ``\texttt{real}'' e ``\texttt{img}''
+	\subp Creas las funciones:
+	\begin{lstlisting}[frame=none, numbers=none, language=C]
+		struct cmplx cmplx_sum(const struct cmplx *a,
+		                       const struct cmplx *b);
+		struct cmplx cmplx_sub(const struct cmplx *a,
+		                       const struct cmplx *b);
+		double cmplx_abs(const struct cmplx *c)
+		void cmplx_norm(struct cmplx *c);
+		void cmplx_print(const struct cmplx *c);
+	\end{lstlisting}
+	\subp Crea un fichero \texttt{main.c} donde hagas uso de esta librería
+\end{statement}
+\end{problem}
+
+\section{Compilación por bloques y makefile}
+\begin{problem}[Compilación por bloques]
+\begin{statement}
+	\subp Compila el programa anterior por bloques, creando los módulos
+	objeto (*.o).
+	\subp Prueba a hacer un cambio en alguna función de la librería, crear
+	de nuevo ``\texttt{cmplx.o}'' y compilar sin regenerar
+	``\texttt{main.o}''
+\end{statement}
+\end{problem}
+
+\begin{problem}[Compilación por bloques]
+\begin{statement}
+	Crea un fichero ``makefile'' que automatice la compilación por bloques.
+\end{statement}
+\end{problem}
+
+\end{document}

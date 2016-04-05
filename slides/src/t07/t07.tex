@@ -1,0 +1,115 @@
+\documentclass{mybeamer}
+\usepackage{tikz}
+\newcommand{\tikzmark}[2]{%
+	     \tikz[overlay,remember picture] \node[text=black, inner sep=2pt] (#1) {#2};
+}
+
+\institute{
+	{\textsl{\large Tema 7}}
+	\\[1em]
+	\textbf{\Large Objetos}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+% \begin{multicols}{2}
+	\tableofcontents
+% \end{multicols}
+\end{frame}
+
+\begin{framesec}[Qué es?]{¿Qué es un objeto?}
+	\begin{itemize}
+		\item Un objeto es una \textit{entidad} con:
+		\begin{itemize}
+			\item Un \textbf{estado}: datos que guarda
+			\item Un \textbf{comportamiento}: métodos que
+				interactúan con ese estado.
+		\end{itemize}
+		\item Un objeto es una \textbf{instancia} de una \textbf{clase}
+			específica
+		\item Un clase puede \textbf{heredar} propiedades de otras
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}[Ejemplo]{Ejemplo de objeto en C}
+	\centering
+	{\Huge Ejemplo de objeto}
+
+	{\Large persona}
+\end{framesec}
+
+\begin{framesubsec}{Ocultación}
+	\note{
+		\begin{itemize}
+			\item Mediante \textbf{\textit{forward declaration}}
+				(declaración adelantada) conseguimos que los
+				atributos de la clase sean \textbf{privados}
+			\item En el main no podemos:
+			\begin{itemize}
+				\item Conocer ni acceder a los miembros de la
+					misma
+				\item Reservar memoria para la estructura, ni
+					estática ni dinámicamente. Esto es
+					porque no conocemos el tamaño que ocupa
+			\end{itemize}
+		\end{itemize}
+	}
+
+	\begin{columns}[onlytextwidth]
+		\begin{column}{0.4\textwidth}
+			\centering
+			person.h
+			\lstinputlisting[language=C, basicstyle=\tiny, linerange={1-4,20-21}]{csrc/person.h}
+		\end{column}
+
+		\begin{column}{0.4\textwidth}
+			\centering
+			person.c
+			\lstinputlisting[language=C, basicstyle=\tiny, linerange={1-2,7-8,11-24}]{csrc/person.c}
+		\end{column}
+	\end{columns}
+
+	\centering
+	main.c
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={3-7,22-24}, xleftmargin=0.3\textwidth, linewidth=0.7\textwidth]{csrc/main.c}
+\end{framesubsec}
+
+\begin{framesubsec}[flags]{Flags}
+	person.c
+	\lstinputlisting[language=C, basicstyle=\scriptsize, linerange={9-10}, linewidth=1.02\textwidth]{csrc/person.c}
+	\vspace{2em}
+	Necesitamos saber si un atributo ha sido o no establecido para:
+	\begin{itemize}
+		\item Saber si el valor que guarda o no es válido
+		\item Saber si se ha reservado memoria y hay que liberarla
+		\item Imprimir o no los atributos
+		\item \ldots
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsec}{Reserva}
+	\note{Hay que añadir el malloc y el free al *.h también}
+	person.c
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={26-41}]{csrc/person.c}
+	main.c
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={5-9,21,24}]{csrc/main.c}
+\end{framesubsec}
+
+\begin{framesubsec}{Setters}
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={43-72}]{csrc/person.c}
+\end{framesubsec}
+
+\begin{framesubsec}{Getters}
+	\lstinputlisting[language=C, basicstyle=\scriptsize, linerange={74-96}]{csrc/person.c}
+\end{framesubsec}
+
+\begin{framesubsec}{Print}
+	\lstinputlisting[language=C, linerange={98-112}]{csrc/person.c}
+\end{framesubsec}
+
+\end{document}

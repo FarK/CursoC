@@ -1,0 +1,5 @@
+#>./args_example foo bar
+Argumento i = <argumento>
+0 = ./args_example
+1 = foo
+2 = bar

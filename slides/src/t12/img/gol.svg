@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="55cm"
+   height="23cm"
+   viewBox="21 122 1087 442"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="gol.svg"
+   inkscape:export-filename="/home/fark/workspace/cursoC/material/slides/src/t12/img/gol.png"
+   inkscape:export-xdpi="113.09927"
+   inkscape:export-ydpi="113.09927">
+  <metadata
+     id="metadata132">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs130" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1918"
+     inkscape:window-height="1056"
+     id="namedview128"
+     showgrid="false"
+     inkscape:zoom="0.28958454"
+     inkscape:cx="965.77639"
+     inkscape:cy="179.5676"
+     inkscape:window-x="0"
+     inkscape:window-y="22"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     id="g4">
+    <rect
+       style="fill: #ffffff"
+       x="309.46"
+       y="123.121"
+       width="510.5"
+       height="28"
+       id="rect6" />
+    <rect
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       x="309.46"
+       y="123.121"
+       width="510.5"
+       height="28"
+       id="rect8" />
+    <text
+       font-size="16"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:italic;font-weight:700"
+       x="564.71"
+       y="142.121"
+       id="text10">struct world</text>
+    <rect
+       style="fill: #ffffff"
+       x="309.46"
+       y="151.121"
+       width="510.5"
+       height="68"
+       id="rect12" />
+    <rect
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       x="309.46"
+       y="151.121"
+       width="510.5"
+       height="68"
+       id="rect14" />
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="312.46"
+       y="165.121"
+       id="text16">-struct cell *world[2]</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="312.46"
+       y="181.121"
+       id="text18">-struct list_head alive_cells</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="312.46"
+       y="197.121"
+       id="text20">-int size_x</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="312.46"
+       y="213.121"
+       id="text22">-int size_y</text>
+    <rect
+       style="fill: #ffffff"
+       x="309.46"
+       y="219.121"
+       width="510.5"
+       height="100"
+       id="rect24" />
+    <rect
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       x="309.46"
+       y="219.121"
+       width="510.5"
+       height="100"
+       id="rect26" />
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="312.46"
+       y="233.121"
+       id="text28">+struct world *world_alloc(int size_x, int size_y)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="312.46"
+       y="249.121"
+       id="text30">+void world_free(struct world *w)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="312.46"
+       y="265.121"
+       id="text32">+void iterate(struct world *w)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="312.46"
+       y="281.121"
+       id="text34">+void print(const struct world *w)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:italic;font-weight:700"
+       x="312.46"
+       y="297.121"
+       id="text36">+void world_set_cell(struct world *w, int x, int y)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:italic;font-weight:700"
+       x="312.46"
+       y="313.121"
+       id="text38">+struct cell *world_get_cell(const struct world *w, int x, int y)</text>
+  </g>
+  <g
+     id="g40">
+    <polyline
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       points="564.71,338.364 564.71,350.971 277.833,350.971 277.833,365.814 "
+       id="polyline42" />
+    <polygon
+       style="fill: #ffffff"
+       points="572.71,338.364 564.71,322.364 556.71,338.364 "
+       id="polygon44" />
+    <polygon
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       points="572.71,338.364 564.71,322.364 556.71,338.364 "
+       id="polygon46" />
+  </g>
+  <g
+     id="g48">
+    <polyline
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       points="564.71,338.364 564.71,350.971 851.586,350.971 851.586,365.814 "
+       id="polyline50" />
+    <polygon
+       style="fill: #ffffff"
+       points="572.71,338.364 564.71,322.364 556.71,338.364 "
+       id="polygon52" />
+    <polygon
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       points="572.71,338.364 564.71,322.364 556.71,338.364 "
+       id="polygon54" />
+  </g>
+  <g
+     id="g56">
+    <rect
+       style="fill: #ffffff"
+       x="596.336"
+       y="366.82"
+       width="510.5"
+       height="28"
+       id="rect58" />
+    <rect
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       x="596.336"
+       y="366.82"
+       width="510.5"
+       height="28"
+       id="rect60" />
+    <text
+       font-size="16"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700"
+       x="851.586"
+       y="385.82"
+       id="text62">struct world_toroidal</text>
+    <rect
+       style="fill: #ffffff"
+       x="596.336"
+       y="394.82"
+       width="510.5"
+       height="68"
+       id="rect64" />
+    <rect
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       x="596.336"
+       y="394.82"
+       width="510.5"
+       height="68"
+       id="rect66" />
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="599.336"
+       y="408.82"
+       id="text68">-struct cell *world[2]</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="599.336"
+       y="424.82"
+       id="text70">-struct list_head alive_cells</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="599.336"
+       y="440.82"
+       id="text72">-int size_x</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="599.336"
+       y="456.82"
+       id="text74">-int size_y</text>
+    <rect
+       style="fill: #ffffff"
+       x="596.336"
+       y="462.82"
+       width="510.5"
+       height="100"
+       id="rect76" />
+    <rect
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       x="596.336"
+       y="462.82"
+       width="510.5"
+       height="100"
+       id="rect78" />
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="599.336"
+       y="476.82"
+       id="text80">+struct world *world_alloc(int size_x, int size_y)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="599.336"
+       y="492.82"
+       id="text82">+void world_free(struct world *w)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="599.336"
+       y="508.82"
+       id="text84">+void iterate(struct world *w)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="599.336"
+       y="524.82"
+       id="text86">+void print(const struct world *w)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:italic;font-weight:700"
+       x="599.336"
+       y="540.82"
+       id="text88">+void world_set_cell(struct world *w, int x, int y)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:italic;font-weight:700"
+       x="599.336"
+       y="556.82"
+       id="text90">+struct cell *world_get_cell(const struct world *w, int x, int y)</text>
+  </g>
+  <g
+     id="g92">
+    <rect
+       style="fill: #ffffff"
+       x="22.5834"
+       y="366.82"
+       width="510.5"
+       height="28"
+       id="rect94" />
+    <rect
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       x="22.5834"
+       y="366.82"
+       width="510.5"
+       height="28"
+       id="rect96" />
+    <text
+       font-size="16"
+       style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700"
+       x="277.833"
+       y="385.82"
+       id="text98">struct world_normal</text>
+    <rect
+       style="fill: #ffffff"
+       x="22.5834"
+       y="394.82"
+       width="510.5"
+       height="68"
+       id="rect100" />
+    <rect
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       x="22.5834"
+       y="394.82"
+       width="510.5"
+       height="68"
+       id="rect102" />
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="25.5834"
+       y="408.82"
+       id="text104">-struct cell *world[2]</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="25.5834"
+       y="424.82"
+       id="text106">-struct list_head alive_cells</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="25.5834"
+       y="440.82"
+       id="text108">-int size_x</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="25.5834"
+       y="456.82"
+       id="text110">-int size_y</text>
+    <rect
+       style="fill: #ffffff"
+       x="22.5834"
+       y="462.82"
+       width="510.5"
+       height="100"
+       id="rect112" />
+    <rect
+       style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000"
+       x="22.5834"
+       y="462.82"
+       width="510.5"
+       height="100"
+       id="rect114" />
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="25.5834"
+       y="476.82"
+       id="text116">+struct world *world_alloc(int size_x, int size_y)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="25.5834"
+       y="492.82"
+       id="text118">+void world_free(struct world *w)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="25.5834"
+       y="508.82"
+       id="text120">+void iterate(struct world *w)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal"
+       x="25.5834"
+       y="524.82"
+       id="text122">+void print(const struct world *w)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:italic;font-weight:700"
+       x="25.5834"
+       y="540.82"
+       id="text124">+void world_set_cell(struct world *w, int x, int y)</text>
+    <text
+       font-size="12.8"
+       style="fill: #000000;text-anchor:start;font-family:monospace;font-style:italic;font-weight:700"
+       x="25.5834"
+       y="556.82"
+       id="text126">+struct cell *world_get_cell(const struct world *w, int x, int y)</text>
+  </g>
+</svg>

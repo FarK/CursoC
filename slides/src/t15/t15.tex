@@ -1,0 +1,190 @@
+\documentclass{mybeamer}
+\usepackage{marvosym}
+
+\institute{
+	{\textsl{\large Tema 15}}
+	\\[1em]
+	\textbf{\Large Sockets}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+% \begin{multicols}{2}
+	\tableofcontents
+% \end{multicols}
+\end{frame}
+
+\begin{framesec}[redes]{Un poco de redes}
+	\begin{itemize}
+		\item \textbf{IP}: Dirección de cada máquina. Por ejemplo: 192.168.0.1
+		\item \textbf{TCP}: Protocolo \textbf{con conexión}. Garantiza
+			la llegada de los paquetes en orden
+		\item \textbf{UDP}: Protocolo \textbf{sin conexión}. No
+			garantiza ni la llegada, ni el orden de los paquetes;
+			pero si llegan, llegan sin errores
+		\item \textbf{Puerto}: Proceso/servicio/cliente de cada máquina
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{Conexión TCP}
+	\centering \Large \textit{Apretón de manos en tres pasos}\\
+	(\textit{3-way handshake})
+	\\[2em]
+	\ig{img/handshake}{}{}
+\end{framesec}
+
+\begin{framesec}{UDP}
+	\centering \Large Sin conexión
+	\\[2em]
+	\ig{img/udp}{}{}
+\end{framesec}
+
+\begin{framesec}{Sockets}
+	\begin{itemize}
+		\item Un socket es una manera de hablar con otros procesos a
+			través de descriptores de ficheros Unix
+		\item Estos programas no tienen por qué estar en la misma
+			máquina. La comunicación a través de internet se hace de
+			forma transparente
+		\item Puedes enviar y recibir cualquier información de otro
+			proceso en otra máquina, en la otra punta del mundo, tan
+			solo escribiendo y leyendo de un fichero
+	\end{itemize}
+
+	\vspace{1em}
+	\centering ``\textit{En Unix todo es un fichero}''
+\end{framesec}
+
+\begin{framesec}{Byte order}
+	``\textit{There really is no easy way to say this, so I'll just blurt it
+	out: your computer might have been storing bytes in reverse order behind
+	your back. I know! No one wanted to have to tell you.}''
+	\hspace*\fill--- Beej Jorgensen \href{http://www.beej.us/guide/bgnet/output/html/singlepage/bgnet.html}{Guide to Network Programming}
+	\vspace{1em}
+
+	\begin{itemize}
+		\item No todas las máquinas almacenan la información en memoria
+			en el mismo orden
+		\item La comunicación entre máquinas con distinto
+			\textit{endianess} es un problema
+		\item El programador tiene que ser consciente de esto al enviar
+			y recibir información de una máquina remota
+		\item Las siguientes funciones nos facilitan la tarea:
+		\begin{itemize}
+			\item \lstinline[language=C]|uint32\_t htonl(uint32\_t hostlong)|
+			\item \lstinline[language=C]|uint16\_t htons(uint16\_t hostshort)|
+			\item \lstinline[language=C]|uint32\_t ntohl(uint32\_t netlong)|
+			\item \lstinline[language=C]|uint16\_t ntohs(uint16\_t netshort)|
+		\end{itemize}
+	\end{itemize}
+
+	\note{Explicar \textit{Hardware-TO-Network} y \textit{Network-TO-Hardware}}
+\end{framesec}
+
+\begin{framesec}[Estructuras]{Estructuras para direcciones}
+	\only<1| handout:1>{
+	Por temas de herencia histórica y retrocompatibilidad, las estructuras
+	para representar una dirección de red son un poco caóticas:
+	\vspace{1em}
+
+	\lstinline[language=C]|struct addrinfo|:
+		Información sobre direccion, socket, protocolo, \ldots (es una lista)
+
+	\lstinline[language=C]|struct sockaddr\_storage|:
+		Estructura genérica para direcciones (cabe IPv6)
+	\begin{itemize}
+		\item \lstinline[language=C]|struct sockaddr|:
+			Estructura genérica para direcciones (no cabe IPv6)
+		\begin{itemize}
+			\item \lstinline[language=C]|struct sockaddr\_in|:
+				Estructura para direcciones IPv4. (puerto + dirección)
+			\begin{itemize}
+				\item \lstinline[language=C]|struct in\_addr|:
+					Estructura para direcciones IPv4
+			\end{itemize}
+			\item \lstinline[language=C]|struct sockaddr\_in6|:
+				Estructura para direcciones IPv6. (puerto + dirección + info extra)
+			\begin{itemize}
+				\item \lstinline[language=C]|struct in6\_addr|:
+					Estructura para direcciones IPv6
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	}
+
+	\only<2| handout:2>{\lstinputlisting[language=C, basicstyle=\tiny, linerange={1-28}]{csrc/structs.c}}
+	\only<3| handout:3>{\lstinputlisting[language=C, basicstyle=\tiny, linerange={30-40}]{csrc/structs.c}}
+\end{framesec}
+
+\begin{framesec}{Direcciones y cadenas}
+	Esta par de funciones nos permiten convertir entre el número binario de
+	una dirección y su representación como cadena de texto:
+	\vspace{1em}
+
+	\begin{itemize}
+		\item \lstinline[language=C]|const char *inet_ntop(int af, const void *src, char *dst, socklen_t size)|
+		\item \lstinline[language=C]|int inet_pton(int af, const char *src, void *dst)|
+	\end{itemize}
+
+	Mediante el parámetro \lstinline[language=C]|int af|, indicamos el tipo
+	de dirección que estamos tratando: (\lstinline[language=C]|AF_INET| ó
+	\lstinline[language=C]|AF_INET6|)
+	\\[1em]
+	Estas funciones están obsoletas por no tratar bien con IPv6, por lo que
+	se desaconseja su uso:
+	\begin{itemize}
+		\item \lstinline[language=C]|gethostbyname()|
+		\item \lstinline[language=C]|gethostbyaddr()|
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{Estructura cliente-servidor}
+	\only<1| handout:1>{
+	\centering \textbf{\Large Funciones principales}
+	\begin{table}[]
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+	\hline
+	\multicolumn{2}{|c|}{\textbf{TCP}} & \multicolumn{2}{c|}{\textbf{UDP}}     \\ \hline
+	\textbf{Server}  & \textbf{Client}   & \textbf{Server}  & \textbf{Client}  \\ \hline
+	socket()         & socket()          & socket()         & socket()         \\ \hline
+	bind()           &                   & bind()           &                  \\ \hline
+	listen()         &                   &                  &                  \\ \hline
+	accept()         & connect()         &                  &                  \\ \hline
+	recv()           & recv()            & recvfrom()       & recvfrom()       \\
+	send()           & send()            & sendto()         & sendto()         \\ \hline
+	close()          & close()           & close()          & close()          \\ \hline
+	\end{tabular}
+	\end{table}
+	}
+
+	\only<2| handout:2>{
+		\begin{itemize}
+			\item \textbf{socket()}: Crea el socket (devuelve un
+				descriptor de fichero)
+			\item \textbf{bind()}: Asocia una dirección al socket
+			\item \textbf{listen()}: Pone el servidor en modo
+				escucha para aceptar peticiones de conexión
+			\item \textbf{accept()}: Acepta la primera petición de
+				la cola o se queda esperando hasta que llegue
+				una
+			\item \textbf{connect()}: Intenta establecer una
+				conexión con un servidor
+			\item \textbf{send()/sendto}: Envía información
+			\item \textbf{recv()/recvfrom}: Recibe información
+			\item \textbf{close()}: Cierra un descriptor de fichero
+				(en nuestro caso, el socket)
+		\end{itemize}
+	}
+\end{framesec}
+
+\begin{framesec}{Código}
+	\centering \Huge \bfseries Estudiar código cliente-servidor
+\end{framesec}
+
+\end{document}

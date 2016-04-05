@@ -1,0 +1,90 @@
+\documentclass{mybeamer}
+\usepackage{tikz}
+\newcommand{\tikzmark}[2]{%
+	     \tikz[overlay,remember picture] \node[text=black, inner sep=2pt] (#1) {#2};
+}
+
+\institute{
+	{\textsl{\large Tema 8}}
+	\\[1em]
+	\textbf{\Large Argumentos de main}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+% \begin{multicols}{2}
+	\tableofcontents
+% \end{multicols}
+\end{frame}
+
+\begin{framesec}{argc y argv}
+	\centering
+	\lstinline[language=C, basicstyle=\Large]|int main(int argc, char *argv[])|
+	\\[2em]
+	\begin{itemize}
+		\item La función main admite dos parámetros que están
+			relacionados con los argumentos que pasamos a nuestro
+			programa al ejecutarlo:
+		\begin{itemize}
+			\item \textbf{argc}: Número de argumentos pasados
+			\item \textbf{argv}: Vector de argumentos
+		\end{itemize}
+
+		\item Cada argumento es una cadena de texto
+		\item Siempre se pasa al menos un argumento con el nombre del
+			programa (incluida la ruta relativa de llamada)
+	\end{itemize}
+\end{framesec}
+
+\begin{framesubsec}{Ejemplo}
+	código:
+	\lstinputlisting[language=C]{csrc/argv.c}
+	salida:
+	\lstinputlisting[numbers=none]{csrc/out.txt}
+\end{framesubsec}
+
+\begin{framesec}{getopt}
+	\begin{itemize}
+		\item Es una utilidad de GNU C Library
+		\item Sigue el estándar POSIX sobre argumentos
+		\item Permite analizar los argumentos fácilmente
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{getopt short}
+	\centering
+	\only<1| handout:1>{
+		\lstinline[language=bash]|> gopts -a -b 3 -c hola|
+		\vspace{1em}
+		\lstinputlisting[language=C, basicstyle=\tiny, linerange={1-28}]{csrc/getoptshort.c}
+	}
+	\only<2| handout:2>{
+		\lstinputlisting[language=C, basicstyle=\tiny, linerange={30-38}, firstnumber=30]{csrc/getoptshort.c}
+		\vspace{1em}
+		\lstinputlisting[language=bash, numbers=none, frame=none, xleftmargin=0.25\textwidth, linewidth=0.75\textwidth]{csrc/gopts.out}
+	}
+\end{framesec}
+
+\begin{framesec}{getopt long}
+	\centering
+	\only<1| handout:1>{
+		\lstinline[language=bash]|> goptl -u -w 10 -h 20 --random=52432|
+		\vspace{1em}
+		\lstinputlisting[language=C, basicstyle=\tiny, linerange={1-23}]{csrc/getoptlong.c}
+	}
+	\only<2| handout:2>{
+		\lstinputlisting[language=C, basicstyle=\tiny, linerange={25-49}, firstnumber=25]{csrc/getoptlong.c}
+	}
+	\only<3| handout:3>{
+		\lstinputlisting[language=C, basicstyle=\tiny, linerange={51-61}, firstnumber=51]{csrc/getoptlong.c}
+		\vspace{1em}
+		\lstinputlisting[language=bash, numbers=none, frame=none, xleftmargin=0.1\textwidth, linewidth=0.9\textwidth]{csrc/goptl.out}
+	}
+\end{framesec}
+
+\end{document}

@@ -1,0 +1,135 @@
+\documentclass{mybeamer}
+
+\institute{
+	{\textsl{\large Tema 4}}
+	\\[1em]
+	\textbf{\Large Estructuras}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+\begin{multicols}{2}
+	\tableofcontents
+\end{multicols}
+\end{frame}
+
+\begin{framesec}{Struct}
+	Lista de variables agrupadas físicamente en un mismo bloque de memoria.
+	\lstinputlisting[language=C]{csrc/struct.c}
+\end{framesec}
+
+\begin{framesubsec}{Alineación y tamaño}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{0.5\textwidth}
+			\lstinputlisting[numbers=none, frame=none, language=C]{csrc/struct_sizeof.c}
+		\end{column}
+
+		\begin{column}{0.5\textwidth}
+			\only<2| handout:1>{\ig{img/struct_padding}{}{}}
+		\end{column}
+	\end{columns}
+	\vspace{2em}
+	\centering
+	\lstinline[language=C]|sizeof(struct ejemplo);|%
+	\only<beamer | beamer:1>{¿5 bytes?}
+	\only<2| handout:1>{\sout{¿5 bytes?} \textrightarrow 12 bytes}
+\end{framesubsec}
+
+\begin{framesubsec}{Anidamiento}
+	\lstinputlisting[language=C]{csrc/struct_annidated.c}
+\end{framesubsec}
+
+\begin{framesubsec}[Anónimas]{Estructuras anónimas}
+	\lstinputlisting[language=C]{csrc/struct_annom.c}
+\end{framesubsec}
+
+\begin{framesubsec}{Arrays y punteros}
+	\lstinputlisting[language=C]{csrc/struct_ptr.c}
+\end{framesubsec}
+
+\begin{framesec}{Union}
+	\begin{itemize}
+		\item Una unión es un valor que tiene varias representaciones o
+			formatos
+		\item Estructura que permite guardar varios tipos de datos en la
+			misma zona de memoria
+	\end{itemize}
+	\lstinputlisting[language=C, basicstyle=\scriptsize]{csrc/union.c}
+\end{framesec}
+
+\begin{framesubsec}{Ejemplo 1}
+	\lstinputlisting[language=C]{csrc/union_e1.c}
+\end{framesubsec}
+
+\begin{framesubsec}{Ejemplo 2}
+	\setlength\columnsep{1cm}
+	\begin{multicols}{2}
+		\lstinputlisting[language=C, basicstyle=\tiny]{csrc/union_e2.c}
+	\end{multicols}
+\end{framesubsec}
+
+\begin{framesec}{Campos de bits}
+	\begin{itemize}
+		\item Característica de las estructuras y uniones que nos
+			permite declarar campos de hasta un bit de longitud
+		\item La memoria reservada es la que indica el tipo del campo
+		\item Para acceder a nivel de bit se realizan numerosas
+			operaciones por debajo
+	\end{itemize}
+	\vspace{2em}
+	\begin{columns}[onlytextwidth]
+	\column{0.5\textwidth}
+		\lstinputlisting[language=C, frame=none, numbers=none]{csrc/bitfield.c}
+	\column{0.4\textwidth}
+		\ig{img/bitfields}{}{}
+	\end{columns}
+\end{framesec}
+
+\begin{framesubsec}{Ejemplo}
+	\lstinputlisting[language=C, basicstyle=\scriptsize]{csrc/bitfield_float.c}
+\end{framesubsec}
+
+\section{Enumerados}
+\begin{framesubsec}[Macros]{Macros: El preprocesador de C}
+	\begin{itemize}
+		\item Preprocesador: Se ejecuta antes de compilar
+		\item Lenguaje de \textbf{macros}
+		\item Multiples usos:
+		\begin{itemize}
+			\item Declaración de constantes
+			\item Pequeñas funciones y utilidades
+			\item Compilación condicional de código
+			\item Depuración
+		\end{itemize}
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsubsec}{Ejemplos}
+	\lstinputlisting[language=C, basicstyle=\tiny]{csrc/macros.c}
+\end{framesubsubsec}
+
+\begin{framesubsec}{Enum}
+	\lstinline[language=C]|enum estado_coche \{ARRANCADO, PARADO, EN_MARCHA, DETENIDO\};|
+
+	\begin{itemize}
+		\item \textbf{Tipo} formado por una lista de macros
+		\item Las macros toman valores enteros de forma
+			consecutiva
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesubsubsec}{Ejemplo}
+	\setlength\columnsep{1cm}
+	\begin{multicols}{2}
+		\lstinputlisting[language=C, basicstyle=\tiny]{csrc/enum.c}
+	\end{multicols}
+\end{framesubsubsec}
+
+\ejframe{Estructuras}
+
+\end{document}

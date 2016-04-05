@@ -1,0 +1,163 @@
+\documentclass{mybeamer}
+\usepackage{beramono} % For bold texttt
+
+\institute{
+	{\textsl{\large Tema 10}}
+	\\[1em]
+	\textbf{\Large Entrada/Salida}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+% \begin{multicols}{2}
+	\tableofcontents
+% \end{multicols}
+\end{frame}
+
+\begin{framesec}[Streams]{¿Qué es un stream?}
+	\begin{center}
+		\textbf{Flujo de bytes} de longitud indeterminada, al que se
+		accede de forma \textbf{secuencial}.
+	\end{center}
+	\vspace{1em}
+
+	En un \textit{stream}:
+	\begin{itemize}
+		\item Al \textbf{leer} uno o más bytes, en la próxima lectura
+			obtendremos los siguientes.
+		\item Al \textbf{escribir} uno o más bytes, en la próxima
+			escritura los añadiremos a continuación.
+	\end{itemize}
+	\vspace{1em}
+
+	Streams estándar:
+	\begin{itemize}
+		\item \texttt{stdout}: \textit{Salida estándar} (normalmente por
+			consola)
+		\item \texttt{stdin}: \textit{Entrada estándar} (normalmente por
+			teclado)
+		\item \texttt{stderr}: \textit{Salida estándar de errores}
+			(normalmente por consola)
+	\end{itemize}
+\end{framesec}
+
+
+\begin{framesec}[Funciones]{Funciones básicas}
+	\begin{itemize}
+		\item \textbf{Apertura y cierre de ficheros}:
+		\begin{itemize}
+			\item \lstinline[language=C, basicstyle=\small]|FILE *f = fopen("file.txt", "r");|
+			\item \lstinline[language=C, basicstyle=\small]|fclose(f);|
+		\end{itemize}
+
+		\item \textbf{Lectura/Escritura en crudo}:
+		\begin{itemize}
+			\item \lstinline[language=C, basicstyle=\small]|size\_t read = fread(buf, sizeof(char), bufsize, f);|
+			\item \lstinline[language=C, basicstyle=\small]|size\_t written = fwrite(buf, sizeof(char), bufsize,f);|
+		\end{itemize}
+
+		\item \textbf{Lectura/Escritura sin formato}:
+		\begin{itemize}
+			\item \lstinline[language=C, basicstyle=\small]|fputs("Hola Mundo", f);|
+			\item \lstinline[language=C, basicstyle=\small]|fgets(buf, bufsize, f);|
+		\end{itemize}
+
+		\item \textbf{Lectura/Escritura con formato}:
+		\begin{itemize}
+			\item \lstinline[language=C, basicstyle=\small]|fprintf(f, "Hola", name);|
+			\item \lstinline[language=C, basicstyle=\small]|fscanf(f, "\%10s \%d", str, &i);|
+		\end{itemize}
+	\end{itemize}
+
+	\vspace{1em}
+	\begin{center}
+	Para más información ver: \url{http://es.cppreference.com/w/c/io}
+	\end{center}
+\end{framesec}
+
+\def\lsti[#1]{\lstinline[language=C, basicstyle=\scriptsize]|\"#1\"|}
+\begin{framesubsec}{\texttt{fopen}}
+	\lstinline[language=C]|FILE *fopen(const char *fname, const char *mode);|
+	\lstinline[language=C]|int fclose(FILE *stream);|
+	\vspace{2em}
+
+	\textbf{Modos}:
+	\vspace{-1em}
+	\begin{table}[]
+	\scriptsize
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	modo      & significado                               & si ya existe                            & si no existe \\ \hline
+	\lsti[r]  & \textbf{Abre} para \textbf{leer}          & lee desde el \textbf{principio}         & error        \\ \hline
+	\lsti[w]  & \textbf{Crea} para \textbf{escribir}      & \textbf{descarta} el contenido          & lo crea      \\ \hline
+	\lsti[a]  & \textbf{Crea} para \textbf{añadir}        & escribe al \textbf{final}               & lo crea      \\ \hline
+	\lsti[r+] & \textbf{Abre} para \textbf{leer/escribir} & lee/escribe desde el \textbf{principio} & error        \\ \hline
+	\lsti[w+] & \textbf{Crea} para \textbf{leer/escribir} & \textbf{descarta} el contenido          & lo crea      \\ \hline
+	\lsti[a+] & \textbf{Crea} para \textbf{leer/añadir}   & lee*/escribe desde el \textbf{final}    & lo crea      \\ \hline
+	\end{tabular}
+	\end{table}
+\end{framesubsec}
+
+\begin{framesubsec}{\texttt{fwrite}}
+	\lstinline[language=C, basicstyle=\footnotesize]|size\_t fwrite(const void *buf, size\_t size, size\_t count,FILE *strm);|
+	\vspace{1em}
+
+	\lstinputlisting[language=C, basicstyle=\tiny]{csrc/fwrite.c}
+\end{framesubsec}
+
+\begin{framesubsec}{\texttt{fread}}
+	\lstinline[language=C, basicstyle=\footnotesize]|size\_t fread(void *buf, size\_t size, size\_t cnt, FILE *strm);|
+	\vspace{1em}
+
+	\lstinputlisting[language=C, basicstyle=\tiny]{csrc/fread.c}
+\end{framesubsec}
+
+\begin{framesubsec}{\texttt{fputs}}
+	\lstinline[language=C, basicstyle=\footnotesize]|int fputs(const char *str, FILE *strm);|
+	\vspace{1em}
+
+	\lstinputlisting[language=C, basicstyle=\tiny]{csrc/fputs.c}
+\end{framesubsec}
+
+\begin{framesubsec}{\texttt{fgets}}
+	\lstinline[language=C, basicstyle=\footnotesize]|char * fgets(char *buf, int bufsize, FILE *strm);|
+	\vspace{1em}
+
+	\lstinputlisting[language=C, basicstyle=\tiny]{csrc/fgets.c}
+\end{framesubsec}
+
+\begin{framesubsec}{\texttt{fprintf}}
+	\lstinline[language=C, basicstyle=\footnotesize]|int fprintf(FILE *strm, const char *frmt, ...);|
+	\vspace{1em}
+
+	\lstinputlisting[language=C, basicstyle=\tiny]{csrc/fprintf.c}
+\end{framesubsec}
+
+\begin{framesubsec}{\texttt{fscanf}}
+	\lstinline[language=C, basicstyle=\footnotesize]|int fscanf(FILE *strm, const char *frmt, ...);|
+	\vspace{1em}
+
+	\lstinputlisting[language=C, basicstyle=\tiny]{csrc/fscanf.c}
+\end{framesubsec}
+
+\begin{framesec}{Funciones peligrosas}
+	Todas las funciones que lean un número indefinido de bytes sin comprobar
+	el tamaño del buffer de destino.
+
+	\begin{itemize}
+		\item \texttt{scanf} y sus variantes si no especificamos el
+			tamaño al escanear una cadena:
+			\lstinline[language=C]|\"\%s\"|
+		\item \texttt{gets}, que lee una cadena de \texttt{stdin} sin
+			posibilidad de especificar ningún límite para su tamaño.
+			Eliminada en el estándar de 2011.
+	\end{itemize}
+\end{framesec}
+
+\end{document}

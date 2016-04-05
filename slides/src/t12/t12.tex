@@ -1,0 +1,96 @@
+\documentclass{mybeamer}
+\usepackage{marvosym}
+
+\institute{
+	{\textsl{\large Tema 12}}
+	\\[1em]
+	\textbf{\Large Objetos (II): Herencia}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+% \begin{multicols}{2}
+	\tableofcontents
+% \end{multicols}
+\end{frame}
+
+\begin{framesec}[Ejemplo]{Ejemplo de herencia}
+	\centering
+	\ig{img/uml}{}{}
+\end{framesec}
+
+\begin{framesec}{El objetivo}
+	\lstinputlisting[language=C, basicstyle=\tiny]{csrc/main.c}
+	\lstinputlisting[language=bash, frame=none, numbers=none, basicstyle=\tiny]{csrc/out.txt}
+\end{framesec}
+
+\begin{framesec}{La forma}
+	\begin{itemize}
+		\item \textbf{Encapsular} la estructura del objeto padre en la
+			del objeto hijo para implementar la \textbf{herencia}
+		\item Utilizar \textbf{punteros a funciones} para implementar el
+			\textbf{polimorfismo}: Un puntero guardará una función u
+			otra en función del tipo de objeto
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{Herencia}
+	\centering
+	\bfseries \Huge HERENCIA
+\end{framesec}
+
+\begin{framesubsec}{Estructura de ficheros}
+	\ig{img/ficheros}{}{}
+\end{framesubsec}
+
+\begin{framesubsec}{Encapsulación}
+	\only<1| handout:1> {
+		\texttt{vehicle\_int.h}
+		\lstinputlisting[language=C, basicstyle=\tiny, linerange={4-9, 14-19}]{csrc/vehicle_int.h}
+		\texttt{car.c}
+		\lstinputlisting[language=C, basicstyle=\tiny, linerange={3-3, 11-20}]{csrc/car.c}
+	}
+	\only<2| handout:2> {
+		\ig{img/encapsulacion}{}{0.5}
+		\vspace{2em}
+		\lstinline[language=C]|struct vehicle *v = (struct vehicle *)car\_alloc(...);|
+	}
+\end{framesubsec}
+
+\begin{framesec}{Polimorfismo}
+	\centering
+	\bfseries \Huge POLIMORFISMO
+\end{framesec}
+
+\begin{framesubsec}{Punteros a funciones}
+	\lstinputlisting[language=C, basicstyle=\scriptsize]{csrc/vehicle_int.h}
+\end{framesubsec}
+
+\begin{framesubsec}{Métodos}
+	\lstinputlisting[language=C, basicstyle=\scriptsize, linerange={63-72, 82-86}]{csrc/vehicle.c}
+
+	Nota: Para crear un método/clase \textbf{abstract\MVAt} basta con no
+	crear el/los método(s) por defecto
+\end{framesubsec}
+
+\begin{framesubsec}{Constructor \texttt{vehicle}}
+	\lstinputlisting[language=C, basicstyle=\scriptsize, linerange={16-38}]{csrc/vehicle.c}
+\end{framesubsec}
+
+\begin{framesubsec}{Constructor \texttt{car}}
+	\lstinputlisting[language=C, basicstyle=\scriptsize, linerange={24-39}]{csrc/car.c}
+\end{framesubsec}
+
+\begin{framesubsec}{Destructores}
+	\texttt{vehicle}
+	\lstinputlisting[language=C, basicstyle=\scriptsize, linerange={40-46}]{csrc/vehicle.c}
+	\texttt{car}
+	\lstinputlisting[language=C, basicstyle=\scriptsize, linerange={41-46}]{csrc/car.c}
+\end{framesubsec}
+
+\end{document}

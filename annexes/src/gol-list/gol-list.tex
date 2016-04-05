@@ -1,0 +1,163 @@
+\documentclass{mybeamer}
+
+\institute{
+	{\textsl{\large Anexo}}
+	\\[1em]
+	\textbf{\Large Como usar listas encadenadas en el Juego de la Vida}
+}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+\tableofcontents
+\end{frame}
+
+\begin{framesec}{Introducción}
+	\begin{itemize}
+		\item Las únicas células que pueden (o no) cambiar de estados
+			son \textbf{las vivas y sus vecinas}
+		\item Para mundos grandes con pocas células se comprueban muchas
+			células muertas inútilmente
+		\item Una lista de células vivas nos permite recorrer las
+			células de interés, obviando todas las que no pueden
+			cambiar de estado
+		\item Esto puede mejorar el rendimiento en mundos grandes con
+			pocas células, pero podría empeorarlo en mundos pequeños
+			con muchas células en un estado estable
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{Estructura}
+	Utilizaremos tres listas cuyos nodos guardarán las coordenadas de una
+	célula de nuestro array:
+	\begin{itemize}
+		\item \textbf{alive\_cells}: Lista de células vivas
+		\item \textbf{to\_kill}: Lista de células que mueren en
+			la siguiente iteración
+		\item \textbf{to\_revive}: Lista de células que
+			nacen/reviven en la siguiente iteración
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{Algoritmo}
+	\begin{enumerate}
+		\item Recorremos \textbf{alive\_cells}, y por cada nodo:
+		\begin{itemize}
+			\item Comprobamos si sobrevive:
+			\begin{itemize}
+				\item SÍ: no hacemos nada
+				\item NO: movemos el nodo a
+					\textbf{to\_kill}
+			\end{itemize}
+			\item Comprobamos si nace alguna de sus vecinas
+				muertas
+			\begin{itemize}
+				\item SÍ: creamos un nuevo nodo en
+					\textbf{to\_revive}
+				\item NO: no hacemos nada
+			\end{itemize}
+		\end{itemize}
+
+	\item Recorremos \textbf{to\_kill}, y por cada nodo:
+			cambiamos el estado a \texttt{MUERTA} en el array y
+			eliminamos el nodo
+
+		\item Recorremos \textbf{to\_revive}, y por cada nodo:
+		\begin{itemize}
+			\item Si es una célula muerta: Revivir y mover el nodo a
+				\textbf{alive\_cells}
+			\item Si es una célula viva: Eliminar el nodo
+		\end{itemize}
+	\end{enumerate}
+\end{framesec}
+
+\newcounter{paso}
+\setcounter{paso}{1}
+\def\pasofw{\ifnum\value{paso}<10 0\fi\arabic{paso}}
+
+\newcommand{\paso}[1]{
+	\begin{framesubsec}{Paso \arabic{paso}}
+		#1
+
+		\vspace{0.5em}
+		\begin{center}
+			\ig{img/example\pasofw}{}{}
+		\end{center}
+	\end{framesubsec}
+	\stepcounter{paso}
+}
+
+%1%
+\paso{
+	Las células negras son las vivas y junto sus vecinas grises, son las
+	únicas que pueden cambiar de estado
+}
+
+%2%
+\paso{
+	La célula muere, movemos el nodo a \textit{to\_kill} y añadimos los dos
+	nacimientos a \textit{to\_revive}
+}
+
+%3%
+\paso{
+	La célula se queda viva. Añadimos de nuevo otros dos nodos a
+	\textit{to\_revive} (no importa que estén repetidos)
+}
+
+%4%
+\paso{
+	La célula muere, movemos el nodo a \textit{to\_kill} y añadimos de nuevo
+	dos nodos a \textit{to\_revive}
+}
+
+%5%
+\paso{
+	Marcamos la célula como muerta en el array y eliminamos el nodo
+}
+
+%6%
+\paso{
+	Marcamos la célula como muerta en el array y eliminamos el nodo
+}
+
+%7%
+\paso{
+	La célula está muerta así que movemos el nodo a \textit{alive\_cells} y
+	la marcamos como viva en el array
+}
+
+%8%
+\paso{
+	La célula está muerta así que movemos el nodo a \textit{alive\_cells} y
+	la marcamos como viva en el array
+}
+
+%9%
+\paso{
+	La célula ya está viva así que eliminamos el nodo
+}
+
+%10%
+\paso{
+	La célula ya está viva así que eliminamos el nodo
+}
+
+%11%
+\paso{
+	Esto mismo ocurre con todos los nodos ya revividos (no importa que estén
+	duplicados)
+}
+
+%12%
+\paso{
+	Ya tenemos la iteración completada y nuestra lista \textit{alive\_cells}
+	preparada para la siguiente
+}
+
+\end{document}

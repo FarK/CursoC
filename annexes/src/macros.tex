@@ -1,0 +1,72 @@
+\newcommand\tc[2]{\textcolor{#1}{#2}}
+
+%%%%%%%%%%
+% BEAMER %
+%%%%%%%%%%
+\newenvironment{framesec}[2][]
+{
+	\ifthenelse{\equal{#1}{}}
+		{\def\shortSecTitle{#2}}
+		{\def\shortSecTitle{#1}}
+	\section[\shortSecTitle]{#2}
+	\begin{frame}
+	\frametitle{#2}
+}
+{
+	\end{frame}
+}
+
+\newenvironment{framesubsec}[2][]
+{
+	\ifthenelse{\equal{#1}{}}
+		{\def\shortSSecTitle{#2}}
+		{\def\shortSSecTitle{#1}}
+	\subsection[\shortSSecTitle]{#2}
+	\begin{frame}
+	\frametitle{#2}
+}
+{
+	\end{frame}
+}
+
+\newenvironment{framesubsubsec}[2][]
+{
+	\ifthenelse{\equal{#1}{}}
+		{\def\shortSSSecTitle{#2}}
+		{\def\shortSSSecTitle{#1}}
+	\subsubsection[\shortSSSecTitle]{#2}
+	\begin{frame}
+	\frametitle{#2}
+}
+{
+	\end{frame}
+}
+
+% Imágenes
+\newcommand\ig[3]{%
+	\def\w{1}%
+	\def\h{0.8}%
+%
+	\ifthenelse{\equal{#2}{}}%
+	{}%
+	{\def\w{#2}}%
+%
+	\ifthenelse{\equal{#3}{}}%
+	{}%
+	{\def\h{#3}}%
+%
+	\includegraphics[keepaspectratio, width=\w\linewidth, height=\h\textheight]{#1}%
+}
+
+\newcommand\fig[3][h]{
+	\begin{figure}[#1]
+		\centering
+		\ig{#2}{1}{1}
+		\ifthenelse{\equal{#3}{}}
+		{}
+		{
+			\caption{#3}
+			\label{fig:#2}
+		}
+	\end{figure}
+}

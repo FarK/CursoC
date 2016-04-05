@@ -1,0 +1,10 @@
+all: mi_prog
+
+mi_prog: main.o persona.o
+	gcc main.o persona.o -o mi_prog
+
+main.o: main.c
+	gcc -c main.c
+
+persona.o: persona.h persona.c
+	gcc -c persona.c

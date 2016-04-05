@@ -1,0 +1,177 @@
+\documentclass{mybeamer}
+\usepackage{tikz}
+\newcommand{\tikzmark}[2]{%
+	     \tikz[overlay,remember picture] \node[text=black, inner sep=2pt] (#1) {#2};
+}
+
+\institute{
+	{\textsl{\large Tema 6}}
+	\\[1em]
+	\textbf{\Large Reserva dinámica de memoria}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+% \begin{multicols}{2}
+	\tableofcontents
+% \end{multicols}
+\end{frame}
+
+\begin{framesec}{Mapa de memoria}
+	\note{
+		\begin{itemize}
+			\item Explicar \textbf{malloc} y \textbf{free}
+			\item Explicar que después de cada malloc hay que
+				\textbf{comprobar siempre}
+		\end{itemize}
+	}
+	\centering
+	\begin{columns}[onlytextwidth]
+		\begin{column}{0.6\textwidth}
+			\begin{itemize}
+				\item \textbf{Heap}: Se almacena la memoria
+					reservada \textbf{dinámicamente} con
+					\textbf{malloc}
+				\item \textbf{Stack}: Se almacenan las
+					\textbf{variables locales} de cada
+					llamada a función
+				\item \textbf{Globales}: Todas las variables
+					globales
+				\item \textbf{Constantes}: Todas las constantes
+					(números, cadenas, etc)
+				\item \textbf{Código}: El programa en sí
+			\end{itemize}
+		\end{column}
+
+		\begin{column}{0.3\textwidth}
+			\ig{img/mem_map}{}{}
+		\end{column}
+	\end{columns}
+\end{framesec}
+
+\begin{framesubsec}{Ejemplo}
+	\note{
+		\begin{itemize}
+			\item \lstinline[language=C]|\#include <stdlib.h>| para
+				el \textbf{malloc} y el \textbf{free}
+			\item Explicar \textbf{static}
+		\end{itemize}
+	}
+	\centering
+	\begin{columns}[onlytextwidth]
+		\begin{column}{0.6\textwidth}
+			\lstinputlisting[language=C, basicstyle=\tiny]{csrc/mm_example.c}
+		\end{column}
+
+		\begin{column}{0.38\textwidth}
+			\only<1| handout:1>{\ig{img/mm_e1}{}{}}
+			\only<2| handout:2>{\ig{img/mm_e2}{}{}}
+			\only<3| handout:3>{\ig{img/mm_e3}{}{}}
+			\only<4| handout:4>{\ig{img/mm_e4}{}{}}
+			\only<5| handout:5>{\ig{img/mm_e5}{}{}}
+		\end{column}
+	\end{columns}
+\end{framesubsec}
+
+\begin{framesec}{Stack Overflow}
+	El uso de funciones recursivas puede ocasionar un agotamiento de la
+	pila
+
+	\begin{columns}[onlytextwidth]
+		\begin{column}{0.6\textwidth}
+			\lstinputlisting[language=C, basicstyle=\tiny]{csrc/stack_overflow.c}
+		\end{column}
+
+		\begin{column}{0.38\textwidth}
+			\only<1| handout:1>{\ig{img/so_1}{}{}}
+			\only<2| handout:2>{\ig{img/so_2}{}{}}
+			\only<3| handout:3>{\ig{img/so_3}{}{}}
+			\only<4| handout:4>{\ig{img/so_4}{}{}}
+		\end{column}
+	\end{columns}
+\end{framesec}
+
+\begin{framesec}{Fragmentación}
+	Fragmentos pequeños de memoria libre entre bloques de memoria reservada.
+
+	\begin{columns}[onlytextwidth]
+		\begin{column}{0.6\textwidth}
+			\lstinputlisting[language=C, basicstyle=\tiny]{csrc/fragm.c}
+		\end{column}
+
+		\begin{column}{0.3\textwidth}
+			\only<1| handout:1>{\ig{img/frag_1}{}{}}
+			\only<2| handout:2>{\ig{img/frag_2}{}{}}
+			\only<3| handout:3>{\ig{img/frag_3}{}{}}
+		\end{column}
+	\end{columns}
+\end{framesec}
+
+\section[arrays multiD]{Reserva de arrays multidimensionales}
+\begin{framesubsec}[Forma 1]{Forma 1 (la mala)}
+	\only<1| handout:1>{
+		Un malloc por cada fila del array (array de punteros)
+
+		\lstinputlisting[language=C, basicstyle=\tiny]{csrc/array_filas.c}
+	}
+
+	\only<2| handout:2>{
+		\centering
+		No se garantiza continuidad entre los bloques reservados
+		\vspace{1em}
+
+		\ig{img/array_filas}{}{}
+	}
+\end{framesubsec}
+
+\begin{framesubsec}[Forma 2]{Forma 2 (la buena)}
+	\lstinputlisting[language=C, basicstyle=\tiny]{csrc/array_bloque.c}
+\end{framesubsec}
+
+\begin{framesec}{Uso tras liberación}
+	\lstinputlisting[language=C, basicstyle=\tiny]{csrc/use_empty.c}
+\end{framesec}
+
+\begin{framesec}[valgrind]{Depuración con valgrind}
+	\begin{itemize}
+		\item Valgrind es una herramienta que nos avisa de los errores
+			cometidos en el manejo de memoria
+		\item Un \textbf{leak} o fuga de memoria es un error de
+			programación que hace que la memoria reservada no se
+			libere cuándo ya no se usa. Un programa que no libere
+			correctamente la memoria reservada puede acabar
+			consumiendo toda la memoria del sistema y dejarlo
+			inutilizado.
+		\item Para que valgrind nos muestre más información podemos
+			hacer dos cosas:
+		\begin{enumerate}
+			\item Compilar con símbolos de depuración (\texttt{gcc
+				-g})
+			\item Ejecutar valgrind con el flag
+				\texttt{--leak-check=full}
+		\end{enumerate}
+	\end{itemize}
+\end{framesec}
+
+\begin{framesubsec}{Ejemplo}
+	\only<1| handout:1>{
+		\lstinputlisting[language=C, basicstyle=\tiny]{csrc/valgrind.c}
+	}
+
+	\only<2| handout:2>{
+		\centering
+		\lstinline[language=bash]|gcc -g valgrind.c -o valg_ej|
+		\lstinline[language=bash]|valgrind --leak-check=full valg_ej|
+
+		\lstinputlisting[basicstyle=\tiny]{csrc/valgrind.bash}
+	}
+\end{framesubsec}
+
+\ejframe{Reserva dinámica de memoria}
+
+\end{document}

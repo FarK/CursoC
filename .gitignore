@@ -1,0 +1,10 @@
+*.pdf
+tmp.latex
+**/csrc/**/*
+!**/csrc/**/
+!**/csrc/**/*.c
+!**/csrc/**/*.h
+!**/csrc/**/*.out
+!**/csrc/**/*.txt
+!**/csrc/**/[Mm]akefile
+**/csrc/**/a.out

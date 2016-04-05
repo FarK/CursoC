@@ -1,0 +1,105 @@
+\documentclass{mybeamer}
+\usepackage{marvosym}
+
+\institute{
+	{\textsl{\large Tema 16}}
+	\\[1em]
+	\textbf{\Large Fork}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+% \begin{multicols}{2}
+	\tableofcontents
+% \end{multicols}
+\end{frame}
+
+\begin{framesec}{Paralelismo}
+	\begin{itemize}
+		\item A veces es \textit{necesario} que nuestro programa realice
+			varias tareas \textbf{a la vez}
+		\item Otras veces es \textit{interesante} dividir el trabajo en
+			partes independientes que pueden realizarse
+			simultáneamente (\textbf{en paralelo}). Esto puede
+			mejorar enormemente la eficiencia de nuestro programa,
+			incluso si nuestro hardware no tiene la capacidad de
+			ejecutar varios procesos a la vez
+		\item \textbf{No siempre es lo mejor}. Paralelizar un programa
+			tiene un coste de rendimiento que, a veces, puede
+			superar a la mejora obtenida.
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{Procesos}
+	\begin{itemize}
+		\item En Unix, hilos y procesos son esencialmente lo mismo
+		\item Todo proceso tiene asociado un número que lo identifica:
+			\textbf{PID}(\textit{Process IDentification})
+		\item En Unix todos procesos se crean mediante la llamada al
+			sistema \lstinline[language=C]{pid\_t fork(void);}
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{\texttt{fork()}}
+	\begin{itemize}
+		\item En el momento en que un programa llama a \texttt{fork()},
+			se duplica.
+		\item A partir de entonces existirán dos procesos (padre e hijo)
+			con el mismo código, las mismas variables, etc.
+		\item El proceso hijo tendrá una copia de la memoria del padre
+			en el instante en el que se llamó a \texttt{fork()}.
+		\item La memoria es independiente. Si uno de los procesos
+			modifica una variable, no afecta a la variable del otro
+			proceso. (Existe la opción de que ambos procesos
+			compartan la memoria, pero se excede del propósito de
+			este curso)
+	\end{itemize}
+\end{framesec}
+
+\begin{framesubsec}{Ejemplo}
+	\only<1| handout:1>{\lstinputlisting[language=C, basicstyle=\tiny]{csrc/fork.c}}
+	\vspace{1em}
+	\only<2| handout:2>{\lstinputlisting[language=bash, frame=none, numbers=none]{csrc/fork.out}}
+\end{framesubsec}
+
+\begin{framesubsec}{Zombies}
+	\begin{itemize}
+		\item Cuando un proceso hijo muere, no muere del todo. Permanece
+			en un estado llamado \textbf{zombie} que permite al
+			padre recuperar información de él aun cuando ha
+			terminado (el código de error por ejemplo)
+		\item El sistema puede llegar a colapsarse si se crean mucho
+			procesos zombies. Conclusión: Siempre llamar a
+			\texttt{wait()})
+		\item Si un proceso padre muere antes que su hijo (no ha llamado
+			a (\texttt{wait()}), el comportamiento depende del SO:
+		\begin{itemize}
+			\item El padre del proceso hijo pasa a ser el proceso
+				\textbf{init} (PID = 1)
+			\item El hijo es matado también inmediatamente
+		\end{itemize}
+	\end{itemize}
+\end{framesubsec}
+
+\begin{framesec}{Señales}
+	\begin{itemize}
+		\item Son un medio para que los procesos puedan interaccionar
+			entre sí. Un proceso envía una señal y el otro la
+			recibe.
+		\item Existen muchos tipos de señales distintas (\texttt{man 7
+			signal})
+		\item Para reaccionar ante la recepción de una señal debemos
+			instalar un \textbf{callback}
+	\end{itemize}
+\end{framesec}
+
+\begin{framesubsec}{Ejemplo}
+	\lstinputlisting[language=C, basicstyle=\tiny]{csrc/signal.c}
+\end{framesubsec}
+
+\end{document}

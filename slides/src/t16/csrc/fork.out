@@ -1,0 +1,7 @@
+Soy el hijo
+	PID = 7590
+Soy el padre
+	PID = 7589
+	PID hijo = 7590
+var del padre = 0
+var del hijo = 10

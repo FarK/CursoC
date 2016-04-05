@@ -1,0 +1,94 @@
+\documentclass{tareas}
+
+\Tema{4}
+
+\begin{document}
+\maketitle
+%TODO: doble página
+\newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Índice}
+\tableofcontents
+\phantomsection
+\newpage
+
+\section{Estructuras y enumerados}
+\begin{problem}[Person]
+\begin{statement}
+	Crea una estructura ``\texttt{person}'' como la del ejemplo, un enum
+	``\texttt{person\_attr}'' y las siguientes tareas:
+
+	\subp Imprime todos los parámetros de la estructura
+	\subp En función del enumerado, imprime el atributo seleccionado
+\end{statement}
+\end{problem}
+
+\begin{problem}[Pahole]
+\begin{statement}
+	\textbf{Pahole} es una herramienta para inspeccionar las estructuras que
+	usa un programa en C, su tamaño, el de sus elementos, los huecos entre
+	ellos, etc.
+
+	\subp Instala la herramienta con \lstinline[language=sh]|sudo apt-get install pahole|
+	\subp Compila tu programa con \textbf{símbolos de depuración}
+	(\lstinline[language=sh]|gcc -g person.c -o person|)
+	\subp Ejecuta pahole sobre el programa: \lstinline[language=sh]|pahole person|
+\end{statement}
+\end{problem}
+
+
+\begin{problem}[Car]
+\begin{statement}
+	Crea una estructura ``\texttt{car}'' con los campos que creas
+	convenientes para definir a un coche. Uno de los campos ha de ser
+	``\texttt{owner}'' del tipo ``\texttt{struct person}''.
+
+	\subp Imprime los atributos del coche y los de su dueño
+\end{statement}
+\end{problem}
+
+\clearpage
+\section{Macros, uniones y campos de bits}
+\begin{problem}[¿String o int?]
+\begin{statement}
+	Crea una estructura que permita interpretar un dato de 64 bits como un
+	entero sin signo o una cadena de caracteres.
+\end{statement}
+\end{problem}
+
+\begin{problem}[Mayusculas y errores]
+\begin{statement}
+	Crea una macro que convierta un caracter
+	\href{https://es.wikipedia.org/wiki/ASCII#Caracteres_imprimibles_ASCII}{ASCII}
+	a mayúsculas. Si el caracter recibido no es una letra, se debe mostrar
+	un error indicando la el nombre del fichero y la fila actuales.
+	\\[1em]
+	\textbf{Pista}: Las macros de varias lineas deben encerrarse en un
+	bloque \lstinline[language=C]|do { ... } while(0);|, para que al
+	utilizarlas en un bucle sin llaves se ejecute correctamente. Las lineas
+	se finalizan con una barra invertida: \texttt{\textbackslash}.
+	\begin{lstlisting}[basicstyle=\normalfont, frame=none, numbers=none, language=C]
+		#define PRINT(a, b) do {         \
+		        printf("a = %d\n", (a)); \
+		        printf("b = %d\n", (b)); \
+		} while(0)
+	\end{lstlisting}
+\end{statement}
+\end{problem}
+
+\begin{problem}[Haciendo chorradas]
+\begin{statement}
+	Usando la estructura y la macro anteriores, realiza un pequeño programa
+	que ejecute por orden:
+
+	\subp Inicializa la estructura con caracteres
+	\subp Imprime la estructura como una cadena y un entero
+	\subp Cambia a mayúsculas tres caracteres cualesquiera de la cadena
+	\subp Imprime de nuevo la cadena y el número
+	\subp Asigna un número cualquiera a la estructura
+	\subp Intenta cambiar un caracter cualquiera para comprobar que se
+	imprime el error
+\end{statement}
+\end{problem}
+
+\end{document}

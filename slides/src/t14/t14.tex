@@ -1,0 +1,156 @@
+\documentclass{mybeamer}
+\usepackage{marvosym}
+
+\institute{
+	{\textsl{\large Tema 14}}
+	\\[1em]
+	\textbf{\Large GTK}
+}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Índice}
+% \begin{multicols}{2}
+	\tableofcontents
+% \end{multicols}
+\end{frame}
+
+\begin{framesec}{Sobre GTK}
+	\begin{itemize}
+		\item \textbf{GTK} (Gimp ToolKit) es una biblioteca libre y
+			multiplataforma para el desarrollo de interfaces
+			gráficas de usuario
+		\item Está escrita en C, aunque tiene \textit{bindings} a una
+			infinidad de lenguajes distintos (C++, C\#, Python, Lua,
+			Haskel, \ldots )
+		\item Se trata de una biblioteca muy popular, con mucha
+			comunidad alrededor y muchos años de madurez
+		\item Las interfaces se construyen mediante la anidación de
+			diversos \textbf{widget}. Tiene una enorme variedad de
+			widgets (ejecutar ``\texttt{gtk3-widget-factory}'')
+		\item Dispone de una documentación detallada y de calidad
+			(\url{https://developer.gnome.org/gtk3/stable/}). Además
+			de numerosos tutoriales y ejemplos desarrollados por su
+			gran comunidad.
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{Bucle principal}
+	\begin{itemize}
+		\item Toda la lógica de la interfaz se realiza dentro de un
+			bucle infinito \lstinline[language=C]|gtk\_main();|
+		\item Antes del bucle la interfaz no es funcional
+		\item Después del bucle no existe interfaz
+		\item No podemos modificar el interior del bucle
+		\item \textbf{¿Cómo interacciono con la interfaz gráfica?}
+	\end{itemize}
+	\lstinputlisting[language=C, basicstyle=\scriptsize]{csrc/e1/main.c}
+\end{framesec}
+
+\begin{framesec}{Señales}
+	\begin{itemize}
+		\item Una señal puede verse como un \textbf{mensaje} que nos
+			envía GTK cada vez que ocurre un \textbf{evento}
+		\item Un \textbf{evento} puede ser cualquier acción del usuario:
+			un click en un botón, mover el ratón sobre una ventana,
+			arrastar algún objeto, \ldots. También hay eventos
+			internos de la interfaz gráfica: se acaba de
+			crear/destruir la ventana, se va a redibujar algún
+			objeto, \ldots
+		\item En GTK se implementan mediante \textbf{callbacks}
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{Callbacks}
+	\begin{itemize}
+		\item Un callback es una función que pasamos a alguna librería,
+			para que ella se encargue de llamarla cuando convenga
+		\item GTK guarda una lista de punteros a funciones por cada
+			posible evento
+		\item Como usuarios de GTK, \textbf{conectamos} una o más
+			funciones de callback a una señal (pulsar un botón).
+			Cuando ocurra el evento oportuno, GTK se encargará de
+			llamarlas a todas
+	\end{itemize}
+\end{framesec}
+
+\begin{framesec}{Glade y builder}
+	\begin{itemize}
+		\item Crear una interfaz compleja directamente en un lenguaje de
+			programación es complejo y poco versátil
+		\item GTK puede crear e inicializar todos los objetos necesarios
+			a partir de un XML con la descripción de la interfaz
+		\item \textbf{Glade} es un programa que nos ayuda a construir
+			este XML de manera gráfica
+	\end{itemize}
+	\vspace{1em}
+	\ig{img/glade}{}{0.5}
+	\note{
+		\begin{itemize}
+			\item Hacer que instalen y ejecuten glade
+			\item Que creen un ``\texttt{build.ui}'' con:
+				\texttt{GtkWindow -> GtkGrid -> (GtkButton, GtkButton)}
+		\end{itemize}
+	}
+\end{framesec}
+
+\begin{framesec}{Ejemplo simple}
+	\only<1| handout:1>{\lstinputlisting[language=C, basicstyle=\tiny, linerange={1-6,8-28}]{csrc/e2/main.c}}
+	\only<2| handout:2>{\lstinputlisting[language=C, basicstyle=\tiny, linerange={29-45}, firstnumber=27]{csrc/e2/main.c}}
+	\only<2| handout:2>{\lstinline[mathescape, language=bash]|gcc -g\ main.c\ $\$$(pkg-config --cflags gtk+-3.0 --libs gtk+-3.0)|}
+
+	\note{
+		\begin{itemize}
+			\item Explicar el código
+			\begin{itemize}
+				\item Explicar \textbf{builder} y objetos
+				\item Explicar \textbf{castings}
+				\item Explicar \textbf{señales}
+			\end{itemize}
+
+			\item Que copien y ejecuten el ejemplo
+		\end{itemize}
+	}
+\end{framesec}
+
+\begin{framesec}{Juego de la vida}
+	\centering \Huge \bfseries Juego de la vida
+	\vspace{1em}
+	\ig{img/gol}{}{0.8}
+\end{framesec}
+
+\begin{framesubsec}{main}
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={13-39}]{csrc/final/main.c}
+\end{framesubsec}
+
+\begin{framesubsec}{gui object}
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={11-29}]{csrc/final/gui_huecos.c}
+\end{framesubsec}
+
+\begin{framesubsec}{drawing area}
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={67-76}]{csrc/final/gui_huecos.c}
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={109-124}]{csrc/final/gui_huecos.c}
+	\note{Tutorial de cairo y gtk (enlazar en la web): \url{http://zetcode.com/gfx/cairo/}}
+\end{framesubsec}
+
+\begin{framesubsec}{Timer}
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={142-143, 148-151}]{csrc/final/gui_huecos.c}
+	\lstinputlisting[language=C, basicstyle=\tiny, linerange={126-134}]{csrc/final/gui_huecos.c}
+\end{framesubsec}
+
+\begin{framesubsec}{Ejercicio}
+	\begin{enumerate}
+		\item Estudia detenidamente el código proporcionado
+		\item Crea el fichero ``\texttt{builder.ui}'' con
+			\textbf{Glade}. Presta atención al identificador de cada
+			widget
+		\item Completa el código de ``\texttt{gui.c}''. Las zonas a
+			completar están marcadas con un \texttt{TODO}
+	\end{enumerate}
+\end{framesubsec}
+
+\end{document}
