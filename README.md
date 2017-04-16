@@ -10,9 +10,8 @@ Presentaciones, ejercicios y todo el material del curso hecho con latex.
 			* **\<temas\>**: Carpetas individuales para cada tema.  Cada una genera un pdf
 				* **img**: Carpeta para las imágenes de este tema
 				* **csrc**: Carpeta para el código fuente de este tema (para lstinclude)
-		* **[pdf]**: Carpeta autogenerada con los *.pdf del subproyecto
 	* **[pdfs]**: Carpeta autogenerada dónde se guardan los *.pdf de todos los subproyectos
-	* **Makefile**: Makefile general. Autogenera todos los subproyectos y guarda los *.pdf en subcarpetas dentro de la carpeta pdfs
+	* **Makefile**: Makefile general. Autogenera todos los subproyectos y guarda los *.pdf dentro de la carpeta pdfs
 	* **Makefile.latex**: Makefile genérico para compilar el código latex de un subproyecto
 
 ## Utilización
@@ -31,7 +30,7 @@ Compilar todo:
 Trabajar dentro de un subproyecto específico:
 
 	raíz $> cd slides
-	raíz/slides $> make alum # Compila slides sin notas y las guarda en raíz/slides/pdf
+	raíz/slides $> make alum # Compila slides sin notas y las guarda en raíz/pdfs/slides
 
 ## Sobre LaTeX
 ### Presentaciones y anexos
