@@ -48,7 +48,7 @@
 }
 
 \newcommand\Tema[1]{\def\@teman{#1}}
-\def\nomCurso{Curso de Programación en C Moderno (II Edición)}
+\def\nomCurso{Curso de Programación en C Moderno (III Edición)}
 
 \setlength{\headheight}{15pt}
 \lhead{\nomCurso}\chead{}\rhead{Ejercicios tema \@teman}

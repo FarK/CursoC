@@ -29,7 +29,7 @@
 
 % PRESENTATION DATA
 \title[Portada]{Curso de programación en C moderno}
-\subtitle{(II Edición)}
+\subtitle{(III Edición)}
 
 \author[]{Neira Ayuso, Pablo \and Falgueras García, Carlos}
 \date{}
