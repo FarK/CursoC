@@ -16,7 +16,7 @@ MAKE_ANNEXES   = cd $(ANNEXES_DIR)   && $(MAKE) -e PDF_TOP=../$(ANNEXES_PDF_DIR)
 
 pres_n_exer: spres exer annex
 
-all: sall exer
+all: sall exer annex
 
 sall:
 	+$(MAKE_SLIDES) all
